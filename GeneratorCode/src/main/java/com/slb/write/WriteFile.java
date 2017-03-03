@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.mysql.jdbc.StringUtils;
 import com.slb.beanGenerator.ColumnMysql;
+import com.slb.utill.ColumnDataUtil;
 
 /**
  * 文件写入类
@@ -31,61 +32,7 @@ public class WriteFile {
 	 * @param proterty 类中的属性
 	 * @throws IOException 
 	 */
-	public static void WriteBeanFile(String dir,String beanName,List<ColumnMysql> proterty) throws IOException{
-		
-			StringBuffer content = new StringBuffer();
-			
-			
-			//引入...
-			
-			
-			//添加bean名称头
-			beanName = beanName.substring(0, 1).toUpperCase()+beanName.substring(1, beanName.length());
-			
-			content.append("public class  "+beanName+"{\n ");
-			content.append("\n");
-			
-			
-			//生成属性
-			for(ColumnMysql node :  proterty){
-				content.append("private  "+node.getColumnType()+" "+node.getColumnName()+";\n");
-				content.append("\n");
-			}
-			
-			
-			//生成getter和setter方法
-			for(ColumnMysql node :  proterty){
-				
-				String firstNodeUpper = node.getColumnName().substring(0, 1).toUpperCase();
-				String firstNodeLower = node.getColumnName().substring(0, 1).toLowerCase();
-				String lastNode = node.getColumnName().substring(1, node.getColumnName().length());
-				
-				//生成getter方法
-				//前面getter
-				content.append("public  "+node.getColumnType()+"  get"+firstNodeUpper+""
-						+lastNode+"(){\n");
-				
-				content.append("    return  node.getColumnName();\n");
-				
-				content.append("}\n");
-				content.append("\n");
-				
-				//setter方法
-				/*content.append("public  void  set"+firstNodeUpper+""
-						+lastNode+"(){\n");
-				content.append("this."+)
-				content.append("    \n");*/
-				
-				content.append("}\n");
-				content.append("\n");
-				
-				
-			}
-			
-			//bean结尾标志
-			content.append("\n} ");
-			
-			
+	public static void WriteBeanFile(String dir,String beanName,String javaStr) throws IOException{
 			
 			//生成文件
 			
@@ -93,34 +40,12 @@ public class WriteFile {
 			
 			FileOutputStream  fileOutputStream = new FileOutputStream(file);
 			
-			fileOutputStream.write(content.toString().getBytes());
-			
+			fileOutputStream.write(javaStr.toString().getBytes());
 		
 	}
 	
 	@Test
 	public void test(){
-		
-		ColumnMysql columnMysql  =   new ColumnMysql();
-		
-		
-		columnMysql.setColumnName("user");
-		
-		columnMysql.setColumnType("String");
-		
-		List<ColumnMysql> param = new ArrayList<>();
-		
-		param.add(columnMysql);
-		
-		
-		WriteFile writeFile = new WriteFile();
-		
-		try {
-			writeFile.WriteBeanFile("f://", "test", param);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		
 		
 	}

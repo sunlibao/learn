@@ -37,13 +37,10 @@ public class App
     	
     	BeanGenereator beanGenereator = new BeanGenereator();
     	
-    	List<String> tableNames =  beanGenereator.findTableName("test");
     	
+    	beanGenereator.writeBeanByDataBase("f://test/", "test");
     	
-    	for(String tableName : tableNames){
-    		
-    	List<ColumnMysql> propertyList  =  beanGenereator.findColumnName(tableName,"test");	
-    	
+    	/*
     	try {
 			WriteFile.WriteBeanFile("f://test/", tableName, propertyList);
 		} catch (IOException e) {
@@ -51,7 +48,7 @@ public class App
 		}
     		
     		
-    	}
+    	}*/
     	
     	
     	

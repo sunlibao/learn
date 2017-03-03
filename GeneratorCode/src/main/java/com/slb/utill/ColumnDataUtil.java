@@ -25,12 +25,13 @@ public class ColumnDataUtil {
 			break;
 
 		default:
+			javaData = "String";
 			break;
 		}
 		
 		
 		
-		return "";
+		return javaData;
 	}
 	
 

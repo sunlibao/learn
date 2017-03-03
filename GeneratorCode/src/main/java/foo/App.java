@@ -14,7 +14,9 @@ import java.util.Properties;
 import org.junit.Test;
 
 import com.slb.beanGenerator.BeanGenereator;
+import com.slb.beanGenerator.ColumnMysql;
 import com.slb.db.manager.DBUtil;
+import com.slb.write.WriteFile;
 
 /**
  * Hello world!
@@ -37,9 +39,22 @@ public class App
     	
     	List<String> tableNames =  beanGenereator.findTableName("test");
     	
+    	
     	for(String tableName : tableNames){
-    		System.out.println(tableName);
+    		
+    	List<ColumnMysql> propertyList  =  beanGenereator.findColumnName(tableName,"test");	
+    	
+    	try {
+			WriteFile.WriteBeanFile("f://test/", tableName, propertyList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    		
+    		
     	}
+    	
+    	
+    	
     	
     	
     }

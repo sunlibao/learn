@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.slb.db.manager.DBUtil;
+import com.slb.utill.ColumnDataUtil;
 
 
 public class BeanGenereator {
@@ -44,9 +45,7 @@ public class BeanGenereator {
 				String name =  rs.getString("table_name");
 				tableNameList.add(name);
 			}
-				
 			
-			conn.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -66,9 +65,9 @@ public class BeanGenereator {
 	 * @param tableName 数据库名称
 	 * @return  返回表中的所有列
 	 */
-	public List<ColumnMysql> findColumnName(String tableName){
+	public List<ColumnMysql> findColumnName(String tableName,String database){
 		
-		List<String> tableNameList = null;
+		List<ColumnMysql> propertyList = null;
 		
 		//查询数据库中的所有的表名
     	
@@ -81,24 +80,32 @@ public class BeanGenereator {
 					+ " column_name,DATA_TYPE "
 					+ " FROM "
 					+ " information_schema. COLUMNS "
-					+ " WHERE table_schema = '?';";
+					+ " WHERE table_name = ? and TABLE_SCHEMA = ? ";
 			
 			PreparedStatement preparedStatement  = conn.prepareStatement(sqlstr);
-			
+			//设置表名
 			preparedStatement.setString(1, tableName);
+			//设置库名
+			preparedStatement.setString(2, database);
 
 			ResultSet rs =  preparedStatement.executeQuery();
 			
-			tableNameList = new ArrayList<String>();
+			propertyList = new ArrayList<>();
 			
 			ColumnMysql columnMysql = null;
 			while(rs.next()){
-				String name =  rs.getString("table_name");
-				tableNameList.add(name);
+				
+				String columnName =  rs.getString("column_name");
+				String columnType =  rs.getString("DATA_TYPE");
+				
+				ColumnMysql columnNode= new ColumnMysql(columnName,ColumnDataUtil.parseColumnToJava(columnType));
+				
+				
+				propertyList.add(columnNode);
+				
 			}
 				
 			
-			conn.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -108,7 +115,7 @@ public class BeanGenereator {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return propertyList;
 		
 	}
 	

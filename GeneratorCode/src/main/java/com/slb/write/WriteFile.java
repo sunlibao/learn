@@ -31,16 +31,17 @@ public class WriteFile {
 	 * @param proterty 类中的属性
 	 * @throws IOException 
 	 */
-	public void WriteBeanFile(String dir,String beanName,List<ColumnMysql> proterty) throws IOException{
+	public static void WriteBeanFile(String dir,String beanName,List<ColumnMysql> proterty) throws IOException{
 		
 			StringBuffer content = new StringBuffer();
-			
 			
 			
 			//引入...
 			
 			
 			//添加bean名称头
+			beanName = beanName.substring(0, 1).toUpperCase()+beanName.substring(1, beanName.length());
+			
 			content.append("public class  "+beanName+"{\n ");
 			content.append("\n");
 			
@@ -59,6 +60,7 @@ public class WriteFile {
 				String firstNodeLower = node.getColumnName().substring(0, 1).toLowerCase();
 				String lastNode = node.getColumnName().substring(1, node.getColumnName().length());
 				
+				//生成getter方法
 				//前面getter
 				content.append("public  "+node.getColumnType()+"  get"+firstNodeUpper+""
 						+lastNode+"(){\n");
@@ -67,6 +69,16 @@ public class WriteFile {
 				
 				content.append("}\n");
 				content.append("\n");
+				
+				//setter方法
+				/*content.append("public  void  set"+firstNodeUpper+""
+						+lastNode+"(){\n");
+				content.append("this."+)
+				content.append("    \n");*/
+				
+				content.append("}\n");
+				content.append("\n");
+				
 				
 			}
 			

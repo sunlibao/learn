@@ -13,6 +13,16 @@ public class ColumnMysql {
 	private String columnType;
 	
 	
+	public ColumnMysql() {
+		
+	}
+	
+
+	public ColumnMysql(String columnName, String columnType) {
+		super();
+		this.columnName = columnName;
+		this.columnType = columnType;
+	}
 
 	public String getColumnName() {
 		return columnName;

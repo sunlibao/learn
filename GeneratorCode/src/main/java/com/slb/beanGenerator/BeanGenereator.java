@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.slb.db.manager.DBUtil;
 import com.slb.utill.ColumnDataUtil;
 import com.slb.write.WriteFile;
@@ -78,7 +80,7 @@ public class BeanGenereator {
 			
 			//查询所有的数据库表名
 			String sqlstr = "SELECT "
-					+ " column_name,DATA_TYPE "
+					+ " column_name as 'columnName',DATA_TYPE as 'columnType' ,column_comment as 'columnComment' "
 					+ " FROM "
 					+ " information_schema. COLUMNS "
 					+ " WHERE table_name = ? and TABLE_SCHEMA = ? ";
@@ -96,10 +98,11 @@ public class BeanGenereator {
 			ColumnMysql columnMysql = null;
 			while(rs.next()){
 				
-				String columnName =  rs.getString("column_name");
-				String columnType =  rs.getString("DATA_TYPE");
+				String columnName =  rs.getString("columnName");
+				String columnType =  rs.getString("columnType");
+				String columnComment=  rs.getString("columnComment");
 				
-				ColumnMysql columnNode= new ColumnMysql(columnName,ColumnDataUtil.parseColumnToJava(columnType));
+				ColumnMysql columnNode= new ColumnMysql(columnName,ColumnDataUtil.parseColumnToJava(columnType),columnComment);
 				
 				
 				propertyList.add(columnNode);
@@ -174,6 +177,13 @@ public class BeanGenereator {
 		
 		//生成属性
 		for(ColumnMysql node :  propertyList){
+			//在属性的上边添加属性
+			if(StringUtils.isNotBlank(node.getColumnComment())){
+				content.append("/** "+node.getColumnComment()+"  */\n");
+			}
+			
+			
+			//添加属性
 			content.append("private  "+node.getColumnType()+" "+node.getColumnName()+";\n");
 			content.append("\n");
 		}

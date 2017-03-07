@@ -40,6 +40,8 @@ public class App
     	
     	beanGenereator.writeBeanByDataBase("f://test/", "test");
     	
+    	
+    	
     	/*
     	try {
 			WriteFile.WriteBeanFile("f://test/", tableName, propertyList);

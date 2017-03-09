@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mysql.jdbc.StringUtils;
-import com.slb.beanGenerator.ColumnMysql;
+import com.slb.db.bean.ColumnMysql;
 import com.slb.utill.ColumnDataUtil;
 
 /**

@@ -13,9 +13,9 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import com.slb.beanGenerator.BeanGenereator;
-import com.slb.beanGenerator.ColumnMysql;
+import com.slb.db.bean.ColumnMysql;
 import com.slb.db.manager.DBUtil;
+import com.slb.generator.BeanGenereator;
 import com.slb.write.WriteFile;
 
 /**

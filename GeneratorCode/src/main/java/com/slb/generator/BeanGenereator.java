@@ -1,4 +1,4 @@
-package com.slb.beanGenerator;
+package com.slb.generator;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.slb.db.bean.ColumnMysql;
+import com.slb.db.bean.TableMysql;
 import com.slb.db.manager.DBUtil;
 import com.slb.utill.ColumnDataUtil;
 import com.slb.write.WriteFile;
@@ -23,9 +25,9 @@ public class BeanGenereator {
 	 * @param dbName 数据库名称
 	 * @return 数据库中表名列表
 	 */
-	public List<String> findTableName(String databaseName){
+	public List<TableMysql> findTableName(String databaseName){
 		
-		List<String> tableNameList = null;
+		List<TableMysql> tableNameList = null;
 		
 		//查询数据库中的所有的表名
     	
@@ -34,7 +36,8 @@ public class BeanGenereator {
 			Connection conn = DBUtil.getConnection();
 			
 			//查询所有的数据库表名
-			String sqlstr = "select table_name from information_schema.tables where table_schema= ?  and table_type='base table'";
+			String sqlstr = "select table_name as 'tableName' ,table_comment as 'tableComment'  "
+					+ " from information_schema.tables where table_schema= ?  and table_type='base table'";
 			
 			PreparedStatement preparedStatement  = conn.prepareStatement(sqlstr);
 			
@@ -42,11 +45,15 @@ public class BeanGenereator {
 
 			ResultSet rs =  preparedStatement.executeQuery();
 			
-			tableNameList = new ArrayList<String>();
+			tableNameList = new ArrayList<>();
 			
 			while(rs.next()){
-				String name =  rs.getString("table_name");
-				tableNameList.add(name);
+				String tableName =  rs.getString("tableName");
+				String tableComment =  rs.getString("tableComment");
+				
+				TableMysql tableMysql = new TableMysql(tableName,tableComment);
+				
+				tableNameList.add(tableMysql);
 			}
 			
 			
@@ -132,14 +139,14 @@ public class BeanGenereator {
 	 */
 	public String writeBeanByDataBase(String dir,String databaseName){
 		
-		List<String> tableNames =  findTableName(databaseName);
+		List<TableMysql> tableNames =  findTableName(databaseName);
 		
-		for(String tableName : tableNames){
+		for(TableMysql tableMysql : tableNames){
 			//java 代码字符串
-			String javastr = generatorBeanStr(tableName,databaseName);
+			String javastr = generatorBeanStr(tableMysql,databaseName);
 			
 			try {
-				WriteFile.WriteBeanFile(dir, tableName, javastr);
+				WriteFile.WriteBeanFile(dir, tableMysql.getTableName(), javastr);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -153,14 +160,16 @@ public class BeanGenereator {
 	
 	/**
 	 * 根据表生成单个对应的bean
-	 * @param tableName 表的名称-数据库表的名称
+	 * @param tableMysql 表的名称-数据库表的名称
 	 * @param databaseName 数据库的名称
 	 * @return
 	 */
-	public String generatorBeanStr(String tableName,String databaseName){
+	public String generatorBeanStr(TableMysql tableMysql,String databaseName){
 		
 		List<ColumnMysql> propertyList =  null;
 		
+		//获得表名称
+		String tableName = tableMysql.getTableName();
 		
 		propertyList  =  this.findColumnName(tableName,databaseName);	
 		
@@ -172,6 +181,14 @@ public class BeanGenereator {
 		//添加bean名称头
 		tableName = tableName.substring(0, 1).toUpperCase()+tableName.substring(1, tableName.length());
 		
+		
+		//增加注释
+		
+		content.append("/** "+tableMysql.getTableComment()+"*/ ");
+		content.append("\n");
+		
+		
+		//类
 		content.append("public class  "+tableName+"{\n ");
 		content.append("\n");
 		

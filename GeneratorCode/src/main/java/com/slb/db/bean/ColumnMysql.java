@@ -1,4 +1,4 @@
-package com.slb.beanGenerator;
+package com.slb.db.bean;
 
 public class ColumnMysql {
 	

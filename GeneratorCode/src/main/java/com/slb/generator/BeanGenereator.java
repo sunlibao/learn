@@ -22,7 +22,7 @@ public class BeanGenereator {
 	
 	/**
 	 * 根据数据库的名称查询所有的表名
-	 * @param dbName 数据库名称
+	 * @param databaseName 数据库名称
 	 * @return 数据库中表名列表
 	 */
 	public List<TableMysql> findTableName(String databaseName){

@@ -2,7 +2,7 @@ package com.slb.db.bean;
 
 /**
  * bean对象内容元素
- * @author sunlibao 
+ * @author sunlibao  
  *
  */
 public class BeanProperty {

@@ -31,7 +31,7 @@ public class BeanGenereator {
 		
 		//查询数据库中的所有的表名
     	
-    	try {
+    	try { 
     		
 			Connection conn = DBUtil.getConnection();
 			

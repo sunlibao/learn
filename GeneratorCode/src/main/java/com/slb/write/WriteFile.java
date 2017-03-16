@@ -1,21 +1,10 @@
 package com.slb.write;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.Test;
 
-import com.mysql.jdbc.StringUtils;
-import com.slb.db.bean.ColumnMysql;
-import com.slb.utill.ColumnDataUtil;
 
 /**
  * 文件写入类
@@ -44,7 +33,7 @@ public class WriteFile {
 		
 	}
 	
-	@Test
+	
 	public void test(){
 		
 		

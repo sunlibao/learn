@@ -3,7 +3,10 @@ package com.slb.generator;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.slb.db.bean.ColumnMysql;
 import com.slb.db.bean.TableMysql;
 import com.slb.db.manager.DBUtil;
+
+import foo.User;
 
 /**
  * service实现类代码生成
@@ -25,7 +30,7 @@ public class ServiceImplGenereator {
 	 * @param columnMysql 列对象
 	 * @return 拼接好的字符串
 	 */
-	public String generatorServiceImpl(TableMysql tableMysql ,List<ColumnMysql> columnList){
+	public static String generatorServiceImpl(TableMysql tableMysql ,List<ColumnMysql> columnList){
 		
 		StringBuffer sb = new StringBuffer();
 		
@@ -72,7 +77,7 @@ public class ServiceImplGenereator {
 	 * @return 查询的sql字符串
 	 * @throws Execption
 	 */
-	private String generatorQuery(String beanName,String tableName, List<ColumnMysql> columnList){
+	private static String generatorQuery(String beanName,String tableName, List<ColumnMysql> columnList){
 		
 		StringBuffer sb = new StringBuffer();
 		
@@ -83,58 +88,68 @@ public class ServiceImplGenereator {
 						+ "");
 		
 		//具体的实现方法
+		sb.append("\n");
+		//添加sql信息---begin
+		sb.append("StringBuffer sbsql = new StringBuffer(\"select   *  from  "+"user"+" \");");
 		
-		Connection conn;
-		try {
+		StringBuffer sbsql =  new StringBuffer();
+		 
+		//原来的sql查询
+		sb.append("\n");
+		sb.append("List<User> result = new ArrayList<User>(); \n"
+				+ "try { \n "
+				+ "\t Connection conn = DBUtil.getConnection(); \n"
+				+ "\t Statement st = conn.createStatement(); "
+				+ "\t ResultSet rs =  st.executeQuery(sbsql.toString()); \n  "
+				+ "\t while(rs.next()){  ");
 			
-			StringBuffer sbsql = new StringBuffer("select  *   from "+tableName+"");
-			
-			boolean flag = false;
-			
-			for(ColumnMysql nodeColumn :  columnList){
-				if(StringUtils.isNotBlank(nodeColumn.getColumnName())){
-					sbsql.append(" "+nodeColumn.getColumnName() +" = ? ,");
-					flag = true;
-				}
+		
+		String paramStr = "";
+		
+		//根据类型确认获得参数的方法
+		for(ColumnMysql columnMysql : columnList){
+			sb.append("\n");
+			sb.append("\t String "+columnMysql.getColumnName() +" = "+" ");
+			switch (columnMysql.getColumnType()) {
+			case "String":
+				sb.append("rs.getString(\""+columnMysql.getColumnName()+"\");");
+				break;
+			case "Integer":
+				sb.append("rs.getString(\""+columnMysql.getColumnName()+"\");");
+				break;
+			default:
+				sb.append("rs.getString(\""+columnMysql.getColumnName()+"\");");
+				break;
 			}
 			
-			//去除查询语句后面多余的逗号
-			if(flag){
-				sbsql = new StringBuffer(sbsql.subSequence(0, sbsql.length()-1));
-			}
+			paramStr += columnMysql.getColumnName()+",";
 			
-			
-			conn = DBUtil.getConnection();
-			PreparedStatement ps =  conn.prepareStatement(sbsql.toString());
-			
-			for(int i= 0 ; i < columnList.size() ; i++ ){
-				
-				if(StringUtils.isNotBlank(columnList.get(i).getColumnName())){
-					
-					ps.setObject(i, columnList.get(i).getColumnName());
-					
-				}
-			}
-			
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
+		//获得参数 通过构造函数的方式添加进行数据的初始化--begin
+		if(paramStr.length() > 0){
+			paramStr = paramStr.substring(0, paramStr.length()-1);
+		}
+		sb.append("\n");
+		sb.append(tableName + " " +tableName +" = new  "+tableName+"("+paramStr+");\n");
+		sb.append("\n");
+		//添加返回值
+		sb.append("result.add("+tableName+");");
+		sb.append("}\n");
 		
-		
-		
-		
-		
-		
-		
-		
+		sb.append("} catch (Exception e) {");
+		sb.append("e.printStackTrace();");
 		
 		sb.append("}\n");
+		
+		//返回返回值	
+		sb.append("return result;");
+		
+		
+		
+		
+		//方法的结束符号
+		sb.append("\n}\n");
 		
 		
 		return sb.toString();

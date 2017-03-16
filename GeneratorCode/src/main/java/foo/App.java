@@ -1,23 +1,14 @@
 package foo;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import org.junit.Test;
 
 import com.slb.db.bean.ColumnMysql;
 import com.slb.db.bean.TableMysql;
-import com.slb.db.manager.DBUtil;
 import com.slb.generator.BeanGenereator;
 import com.slb.generator.ServiceGenereator;
+import com.slb.generator.ServiceImplGenereator;
 import com.slb.write.WriteFile;
 
 /**
@@ -33,7 +24,7 @@ public class App
     	
     }
     
-    @Test
+    
     public void testDB(){
     	
     	BeanGenereator beanGenereator = new BeanGenereator();
@@ -50,11 +41,12 @@ public class App
     		
     		List<ColumnMysql> columnMysqls  =  beanGenereator.findColumnName(tableMysql.getTableName(), "test");
     		
-    		String serviceStr = serviceGenereator.generatorServiceInterface(tableMysql, columnMysqls);
+    		//String serviceStr = serviceGenereator.generatorServiceInterface(tableMysql, columnMysqls);
     		
+    		String serviceImplStr = ServiceImplGenereator.generatorServiceImpl(tableMysql, columnMysqls);
     		
     		try {
-				WriteFile.WriteBeanFile("f://test/", "UserService", serviceStr);
+				WriteFile.WriteBeanFile("f://test/", "UserServiceImpl", serviceImplStr);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

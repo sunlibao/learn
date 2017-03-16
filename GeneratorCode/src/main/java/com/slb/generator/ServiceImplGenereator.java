@@ -117,8 +117,6 @@ public class ServiceImplGenereator {
 			}
 			
 			
-			
-			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -89,20 +89,33 @@ public class ServiceImplGenereator {
 			
 			StringBuffer sbsql = new StringBuffer("select  *   from "+tableName+"");
 			
+			boolean flag = false;
+			
 			for(ColumnMysql nodeColumn :  columnList){
-				
 				if(StringUtils.isNotBlank(nodeColumn.getColumnName())){
-					
-					sbsql.append(nodeColumn.getColumnName() +" = ");
-					
+					sbsql.append(" "+nodeColumn.getColumnName() +" = ? ,");
+					flag = true;
 				}
-				
-				
-				
 			}
+			
+			//去除查询语句后面多余的逗号
+			if(flag){
+				sbsql = new StringBuffer(sbsql.subSequence(0, sbsql.length()-1));
+			}
+			
 			
 			conn = DBUtil.getConnection();
 			PreparedStatement ps =  conn.prepareStatement(sbsql.toString());
+			
+			for(int i= 0 ; i < columnList.size() ; i++ ){
+				
+				if(StringUtils.isNotBlank(columnList.get(i).getColumnName())){
+					
+					ps.setObject(i, columnList.get(i).getColumnName());
+					
+				}
+			}
+			
 			
 			
 			

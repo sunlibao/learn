@@ -9,19 +9,10 @@ import java.io.Serializable;
  */
 public class Demand implements Serializable {
 
-	private String code = ReturnCode.SUCCESS_200;
+	//返回编号
+	private String code;
+	//返回消息
     private String msg;
-    
-
-    public static class ReturnCode {
-        /** 业务操作失败，操作全部回滚 **/
-        public static final String ERROR_100 = "100";
-        /** 业务操作成功 **/
-        public static final String SUCCESS_200 = "200";
-    }
-
-
-
 
 
 	public String getCode() {
@@ -29,15 +20,9 @@ public class Demand implements Serializable {
 	}
 
 
-
-
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-
-
 
 
 	public String getMsg() {
@@ -45,11 +30,9 @@ public class Demand implements Serializable {
 	}
 
 
-
-
-
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
 	
 }

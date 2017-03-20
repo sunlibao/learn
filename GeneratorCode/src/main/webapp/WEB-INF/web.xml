@@ -5,17 +5,6 @@
                                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
   
   
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
-        <!-- 默认是/WEB-INF/applicationContext.xml -->
-     </context-param>
-     
-     <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-     </listener>
   
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
@@ -32,6 +21,20 @@
         <servlet-name>SpringMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+     <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+     </listener>
+    
+     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+        <!-- 默认是/WEB-INF/applicationContext.xml -->
+     </context-param>
+     
+ 
     
     
     

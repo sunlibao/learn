@@ -18,10 +18,34 @@
     <!-- 激活@Controller模式 -->
     <mvc:annotation-driven />
     <!-- 设置使用注解的类所在的jar包 -->
-    <context:component-scan base-package="com.sys.controller" />
+    <context:component-scan base-package="com.sys" />
     
     <!-- 完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+    
+    <!-- 仅扫描base-package下的@Controller注解 -->
+    <context:component-scan base-package="cn.zhao.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    
+    <!-- 解决Spring MVC @ResponseBody返回中文字符串乱码问题 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    
     
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
          <property name="prefix">

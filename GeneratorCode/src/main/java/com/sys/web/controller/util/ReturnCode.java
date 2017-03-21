@@ -8,8 +8,9 @@ import org.omg.CORBA.NO_PERMISSION;
  */
 public enum ReturnCode {
 
-    SUCCESS("200","操作成功"),
-    ERROR("500","操作失败");
+    SUCCESS("0","操作成功"),
+    ERROR("1","操作失败"),
+    NOTNULL("30002","不能为空");
     
     //编号
     private String code;

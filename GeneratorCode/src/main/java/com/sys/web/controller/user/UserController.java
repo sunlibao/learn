@@ -42,7 +42,8 @@ public class UserController {
         	}else{
         		
         		Map<String,Object> resMap = new HashMap<String, Object>();
-            	resMap.put("fanren", "hello");
+        		userService.findUserList();
+            	resMap.put("data", "");
             	apiDemand.setData(resMap);
             	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
         		apiDemand.setMsg(ReturnCode.SUCCESS.getName());

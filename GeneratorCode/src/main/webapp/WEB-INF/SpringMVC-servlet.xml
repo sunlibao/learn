@@ -23,11 +23,6 @@
     <!-- 完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
     
-    <!-- 仅扫描base-package下的@Controller注解 -->
-    <context:component-scan base-package="cn.zhao.controller" use-default-filters="false">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
-    
     
     <!-- 解决Spring MVC @ResponseBody返回中文字符串乱码问题 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />

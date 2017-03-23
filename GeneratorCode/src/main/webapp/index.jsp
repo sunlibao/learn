@@ -5,38 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<script type="text/javascript" src="./js/jquery-3.2.0.min.js" ></script>
+<script type="text/javascript" src="./js/common.js" ></script>
+<script type="text/javascript" src="./js/user/user.js" ></script>
 </head>
 <body>
 	<h3>代码生成器</h3>
 	
-	<script type="text/javascript">
-	
-	var time = "00:00";
-	
-	function addSecond(){
-		var second = time.split(":")[1];
-		second = second-0+1;
-		if(second <=9&&second<60){
-			second = "0"+9;
-			time = time.split(":")[0]+":"+second;
-		}else if(second >9&&second<60){
-			time = time.split(":")[0]+":"+second;
-		}else if(second>=60){
-			
-			if(time.split(":")[0]-0<=9){
-				time = time.split(":")[0]-0+1+":"+"00";
-				time = "0"+time;
-			}else{
-				time = time.split(":")[0]-0+1+":"+"00";
-			}
-			
-		}
-		
-		console.log(time);
-	}
-	
-	window.setInterval(addSecond,100); 
-	
-	</script>
+	<div id="login">
+		<div>
+			<span>用户名:</span>
+			<input name="username" />
+		</div>
+		<div>
+			<span>密&nbsp;码:</span>
+			<input name="password"  />
+		</div>
+		<button id="loginButton" >登录</button>
+	</div>
+
 </body>
 </html>

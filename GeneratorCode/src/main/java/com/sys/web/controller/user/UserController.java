@@ -3,6 +3,8 @@ package com.sys.web.controller.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,11 +31,12 @@ public class UserController {
 	
     @RequestMapping("/user/login")
     @ResponseBody
-    public ApiDemand login(@RequestParam(value = "param") String  param ) {
+    public ApiDemand login(HttpServletRequest request) {
     	
     	ApiDemand apiDemand = new ApiDemand();
     	
     	try{
+    		String param = request.getParameter("param");
     		
     		BillModel billModel = ParamUtil.parseBillModel(param);
     		

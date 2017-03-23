@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sys.service.user.UserService;
+import com.sys.vo.user.UserVo;
 import com.sys.web.controller.util.ApiDemand;
 import com.sys.web.controller.util.BillModel;
 import com.sys.web.controller.util.ParamUtil;
@@ -19,6 +20,9 @@ import com.sys.web.controller.util.ReturnCode;
 @Controller
 public class UserController {
     
+	/**
+	 * 用户业务处理类
+	 */
 	@Autowired
 	private UserService userService;
 	
@@ -42,11 +46,26 @@ public class UserController {
         	}else{
         		
         		Map<String,Object> resMap = new HashMap<String, Object>();
-        		userService.findUserList();
-            	resMap.put("data", "");
-            	apiDemand.setData(resMap);
-            	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
-        		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+        		
+        		UserVo userVo = this.userService.findUserByUserName(billModel.getString("userName"));
+        		
+        		if(userVo == null){
+        			apiDemand.setCode(ReturnCode.NOTEXIST.getCode());
+            		apiDemand.setMsg("当前用户"+ReturnCode.NOTEXIST.getName());
+        		}else{
+        			
+        			if(userVo.getPassword().equalsIgnoreCase(billModel.getString("password"))){
+        				resMap.put("data", userVo);
+                    	apiDemand.setData(resMap);
+                    	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+                		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+        			}else{
+        				apiDemand.setCode(ReturnCode.NOTRIGHT.getCode());
+                		apiDemand.setMsg("密码"+ReturnCode.NOTRIGHT.getName());
+        			}
+        			
+        		}
+            	
         	}
     		
     	}catch(Exception e){

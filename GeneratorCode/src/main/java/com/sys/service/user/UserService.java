@@ -2,7 +2,9 @@ package com.sys.service.user;
 
 import java.util.List;
 
-import foo.User;
+import com.sys.vo.user.UserVo;
+
+
 
 
 
@@ -13,7 +15,14 @@ import foo.User;
  */
 public interface UserService {
 	
-	List<User> findUserList();
+	List<UserVo> findUserList();
+
+	/**
+	 * 根据用户名查询用户信息
+	 * @param userName 用户姓名
+	 * @return 用户对象
+	 */
+	UserVo findUserByUserName(String userName);
 	
 
 }

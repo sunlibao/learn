@@ -8,8 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.sys.service.user.UserService;
-
-import foo.User;
+import com.sys.vo.user.UserVo;
 
 
 /**
@@ -24,11 +23,27 @@ public class UserServiceImpl implements UserService {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<User> findUserList() {
+	public List<UserVo> findUserList() {
 		
-		List<User> result = this.jdbcTemplate.query("select * from basic_user ", new BeanPropertyRowMapper<User>(User.class));
+		List<UserVo> result = this.jdbcTemplate.query(" select * from basic_user ", new BeanPropertyRowMapper<UserVo>(UserVo.class));
 		
 		return result;
+	}
+	
+
+	@Override
+	public UserVo findUserByUserName(String userName) {
+		UserVo userVo = null;
+		
+		
+		List<UserVo> result = this.jdbcTemplate.query("select * from basic_user where userName = ? ",
+				new Object[]{userName} ,new BeanPropertyRowMapper<UserVo>(UserVo.class));
+		
+		if(result.size() > 0){
+			userVo =  result.get(0);
+		}
+		
+		return userVo;
 	}
 	
 	

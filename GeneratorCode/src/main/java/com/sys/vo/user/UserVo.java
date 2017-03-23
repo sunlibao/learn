@@ -1,7 +1,7 @@
-package foo;
+package com.sys.vo.user;
 
 /** */ 
-public class  User{
+public class  UserVo{
  
 /** 主键id  */
 private  String id;
@@ -16,11 +16,11 @@ private  String password;
 private  Integer dr;
 
 
-public User() {
+public UserVo() {
 	super();
 }
 
-public User(String id, String username, String password, Integer dr) {
+public UserVo(String id, String username, String password, Integer dr) {
 	super();
 	this.id = id;
 	this.username = username;

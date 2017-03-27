@@ -31,7 +31,11 @@
 				
 				saveAjax("user/login",{"userName":"sunlibao","password":"123456"},
 						function(msg){
+					
 						console.log(msg);
+						
+						window.location.href="static/html/index.html";
+						
 				},function error(){
 					console.log("111");
 				});

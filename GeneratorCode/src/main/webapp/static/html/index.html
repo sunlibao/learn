@@ -4,17 +4,27 @@
 <meta charset="UTF-8">
 <title>首页</title>
 
-<script type='text/javascript' src='../js/lib/knockout-3.4.2.js'></script>
-<script type='text/javascript' src='../js/lib/jquery-3.2.0.min.js'></script>
-<script type='text/javascript' src='index.js'></script>
+<script type='text/javascript' src='../js/lib/require/require.js'></script>
+<script type='text/javascript' src='../js/lib/require/config.js'></script>
+
+
+<script type="text/javascript">
+
+    require(["jquery"],function($){
+    	$(function(){
+    		alert("load finished");
+    	})
+    	
+    });
+    
+    
+</script>
 </head>
 <body>
 
 我是首页，欢迎大家到来
 
 <div id="">
-
-
 
 </div>
 

@@ -34,7 +34,7 @@
 					
 						console.log(msg);
 						
-						window.location.href="static/html/index.html";
+						window.location.href="view/index.jsp";
 						
 				},function error(){
 					console.log("111");

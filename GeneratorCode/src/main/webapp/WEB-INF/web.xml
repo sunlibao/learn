@@ -32,7 +32,9 @@
         <!-- 默认是/WEB-INF/applicationContext.xml -->
      </context-param>
      
-
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/views/login.jsp</welcome-file>
+	</welcome-file-list>
     
 
 </web-app>

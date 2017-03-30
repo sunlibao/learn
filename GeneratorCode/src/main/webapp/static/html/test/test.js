@@ -1,6 +1,7 @@
-define("jquery","text!html/test/test",function($){
+define(["text!html/test/test.html"],function(template){
 	
-	alert(111);
-	
-	
+	 return {
+		 template:template
+	    };
+
 });

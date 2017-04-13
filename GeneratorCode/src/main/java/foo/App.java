@@ -20,20 +20,23 @@ public class App
     public static void main( String[] args )
     {
         
+    	BeanGenereator beanGenereator = new BeanGenereator();
     	
+    	beanGenereator.writeBeanByDataBase("f://test/", "test");
     	
     }
+    
     
     
     public void testDB(){
     	
     	BeanGenereator beanGenereator = new BeanGenereator();
     	
-    	//beanGenereator.writeBeanByDataBase("f://test/", "test");
+    	beanGenereator.writeBeanByDataBase("f://test/", "test");
     	
     	
     	//------------------
-    	ServiceGenereator serviceGenereator = new ServiceGenereator();
+    	/*ServiceGenereator serviceGenereator = new ServiceGenereator();
     	
     	List<TableMysql>  result =  beanGenereator.findTableName("test");
     	
@@ -51,7 +54,7 @@ public class App
 				e.printStackTrace();
 			}
     		
-    	}
+    	}*/
     	
     	
     

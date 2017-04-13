@@ -15,6 +15,8 @@
 <script type='text/javascript' src='${ctx}/static/lib/require/require.js'></script>
 <script type='text/javascript' src='${ctx}/static/lib/require/config.js'></script>
 <script type='text/javascript' src='${ctx}/static/lib/director/director.js'></script>
+<script type='text/javascript' src='${ctx}/static/lib/jquery-3.2.0.js'></script>
+<script type="text/javascript" ></script>
     <script>
      
      initPage = function(code) { 
@@ -35,16 +37,91 @@
       router.init();
 
     </script>
+    
+    <style type="text/css">
+   body {
+		margin: 0px;
+		padding: 0px;
+		background-color: gray;
+	}
+	
+	ul {
+		list-style-type: none;
+	}
+	
+	a{
+		text-decoration: none;
+	}
+	
+	#menu{
+		background-color:white;
+		width: 300px;
+		float: left;
+		height: 100%;
+		min-height: 500px;
+	}
+	
+	#content{
+		background-color:white;
+		width:800px; 
+		float: left;
+		margin-left: 25px;
+		min-height: 500px;
+	}
+	
+	
+	/*菜单选项*/
+	.menu_list_item{
+		height: 37px;
+		line-height: 37px;
+		text-align: left;
+	}
+	
+	
+    </style>
+    
+    <script type="text/javascript">
+    
+    $(document).ready(function(){
+    	
+    	var height =  $("#content").height();
+    	
+    	console.log(height);
+    	
+    	$("#menu").css("height",height);
+    	
+    	
+    	
+    	
+    });
+    
+    </script>
+    
   </head>
   <body>
-  <div id="main" style="width: 1024px;margin:  0 auto;">
-	  	<div id="header" style="background-color: yellow;width: 1024px;">
-	  		头
+  
+  <div id="header" style="background-color:blue;height: 80px;margin-bottom:20px;">
+	  		
+  </div>
+  <div id="main" style="width:1140px;;margin:  0 auto;">
+	  	<div id="menu">
+	  		<ul>
+	  			<li class="menu_list_item">
+	  				<a href="javascipt:void(0);">
+	  				<i></i>
+	  					我的课程
+	  				</a>
+	  			</li>
+	  			
+	  			<li class="menu_list_item">
+	  				<a href="javascipt:void(0);">
+	  				<i></i>
+	  					个人信息
+	  				</a>
+	  			</li>
+	  		</ul>
 	  	</div>
-	  	<div id="left" style="background-color: gray;width: 300px;float: left;">
-	  	左侧
-	  	</div>
-	  	<div id="content" style="background-color:green;width:700px; float: right; ">
+	  	<div id="content">
 		  	<ul>
 		      <li><a href="#/html/1">#/html/1</a></li>
 		      <li><a href="#/html/2">#/html/2</a></li>

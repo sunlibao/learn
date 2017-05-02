@@ -11,7 +11,6 @@
 <script type="text/javascript">
 	window.$ctx = "${ctx}";
 </script>
-
 <script type='text/javascript' src='${ctx}/static/lib/require/require.js'></script>
 <script type='text/javascript' src='${ctx}/static/lib/require/config.js'></script>
 <script type='text/javascript' src='${ctx}/static/lib/director/director.js'></script>
@@ -48,9 +47,16 @@
 	ul {
 		list-style-type: none;
 	}
+	ul li{
+		background-color: white;
+		border-style:solid;
+		border-width: 1px;
+		padding-left: 30px;
+	}
 	
 	a{
 		text-decoration: none;
+		color: gray;
 	}
 	
 	#menu{
@@ -86,14 +92,25 @@
     	
     	var height =  $("#content").height();
     	
-    	console.log(height);
     	
     	$("#menu").css("height",height);
     	
     	
+    	$(".menu_list_item a").bind("click",function(){
+       	 
+       	 
+        });
     	
     	
     });
+    
+    
+    
+    
+     
+   
+  
+    
     
     </script>
     
@@ -107,18 +124,12 @@
 	  	<div id="menu">
 	  		<ul>
 	  			<li class="menu_list_item">
-	  				<a href="javascipt:void(0);">
+	  				<a href="javascipt:void(0);" code="site">
 	  				<i></i>
-	  					我的课程
+	  					站点
 	  				</a>
 	  			</li>
 	  			
-	  			<li class="menu_list_item">
-	  				<a href="javascipt:void(0);">
-	  				<i></i>
-	  					个人信息
-	  				</a>
-	  			</li>
 	  		</ul>
 	  	</div>
 	  	<div id="content">

@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${ctx}/static/lib/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="${ctx}/static/lib/layer/layer.js"></script>
 <title>爱学习</title>
 <style type="text/css">
 
@@ -21,6 +23,7 @@ ul{
 li{
 	float: left;
 	word-spacing: 30px;
+	margin-left: 30px;
 }
 
 
@@ -52,6 +55,11 @@ li{
 }
 
 
+#content{
+	clear: both;
+	margin-bottom: 30px;
+	min-height: 400px;
+}
 
 
 .box{
@@ -89,7 +97,37 @@ li{
 }
 
 
+#footer_space{
+	clear: both;
+	height: 20px;
+	
+}
 
+.footer{
+	clear: both;
+	background-color:black;
+	height:45px;
+	line-height:45px;
+	padding-left: 36px;
+	
+}
+
+.footer  span{
+	background-color: black;
+	color: white;
+	float: left;
+	font-size: 13px;
+	margin-left: 37px;
+}
+
+.footer div{
+	clear: both;
+	background-color: black;
+}
+
+.footer p{
+	color: white;
+}
 
 </style>
 
@@ -98,64 +136,91 @@ li{
 <body>
 	<div class="header">
 		<img src="${ctx}/image/font/logo.png"></img>
-		<span><a>登录</a></span>
+		<span><a id="loginButton">登录</a></span>
 		<span><a>注册</a></span>
 	</div>
 	
-	<div>
-		<h3>推荐课程</h3>
-		<ul>
-			<li>
-				<div class="box">
-					<h4>推荐课程</h4>
-					<div>
-						<label>HTMl学习</label>
-						<span>基础的知识讲解，试用于基础的数据建设。</span>
+	<div id="content">
+		<div>
+			<h3>推荐课程</h3>
+			<ul>
+				<li>
+					<div class="box">
+						<h4>推荐课程</h4>
+						<div>
+							<label>HTMl学习</label>
+							<span>基础的知识讲解，试用于基础的数据建设。</span>
+						</div>
+						<span>初级</span>
+						<span>1420人</span>
 					</div>
-					<span>初级</span>
-					<span>1420人</span>
-				</div>
-				
-			</li>
-			<li>
-				<div class="box">
-					<h4>推荐课程</h4>
-					<div>
-						<label>HTMl学习</label>
-						<span>基础的知识讲解，试用于基础的数据建设。</span>
+					
+				</li>
+				<li>
+					<div class="box">
+						<h4>推荐课程</h4>
+						<div>
+							<label>HTMl学习</label>
+							<span>基础的知识讲解，试用于基础的数据建设。</span>
+						</div>
+						<span>初级</span>
+						<span>1420人</span>
 					</div>
-					<span>初级</span>
-					<span>1420人</span>
-				</div>
-				
-			</li>
-			<li>
-				<div class="box">
-					<h4>推荐课程</h4>
-					<div>
-						<label>HTMl学习</label>
-						<span>基础的知识讲解，试用于基础的数据建设。</span>
+					
+				</li>
+				<li>
+					<div class="box">
+						<h4>推荐课程</h4>
+						<div>
+							<label>HTMl学习</label>
+							<span>基础的知识讲解，试用于基础的数据建设。</span>
+						</div>
+						<span>初级</span>
+						<span>1420人</span>
 					</div>
-					<span>初级</span>
-					<span>1420人</span>
-				</div>
-				
-			</li>
-			<li>
-				<div class="box">
-					<h4>推荐课程</h4>
-					<div>
-						<label>HTMl学习</label>
-						<span>基础的知识讲解，试用于基础的数据建设。</span>
+					
+				</li>
+				<li>
+					<div class="box">
+						<h4>推荐课程</h4>
+						<div>
+							<label>HTMl学习</label>
+							<span>基础的知识讲解，试用于基础的数据建设。</span>
+						</div>
+						<span>初级</span>
+						<span>1420人</span>
 					</div>
-					<span>初级</span>
-					<span>1420人</span>
-				</div>
-				
-			</li>
-		</ul>
-		
+					
+				</li>
+			</ul>
+		</div>
 	</div>
+	<div id="footer_space"></div>
+	<div class="footer">
+			<span><a>首页</a></span>
+			<span><a>企业合作</a></span>
+			<span><a>联系我们</a></span>
+			<span><a>常见问题</a></span>
+			<span><a>意见反馈</a></span>
+		<div></div>
+			<p>文网文</p>
+	</div>
+	
+	
+	
+	
+	
+	<script type="text/javascript">
+	
+	/*
+		点击登录，弹出登录窗口
+	*/
+	$("#loginButton").on("click",function(){
+		window.location.href="${ctx}/front/login";
+	});
+	
+	
+	</script>
 	
 	
 </body>

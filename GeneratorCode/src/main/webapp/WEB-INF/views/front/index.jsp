@@ -45,6 +45,11 @@ li{
 	cursor: pointer;
 }
 
+.header span a{
+	text-decoration: none;
+	color: white;
+}
+
 
 
 .banner{
@@ -136,8 +141,14 @@ li{
 <body>
 	<div class="header">
 		<img src="${ctx}/image/font/logo.png"></img>
-		<span><a id="loginButton">登录</a></span>
-		<span><a>注册</a></span>
+		<c:if test="${LoginCustomer == null}">
+			<span><a id="loginButton">登录</a></span>
+			<span><a>注册</a></span>
+		</c:if>
+		<c:if test="${LoginCustomer != null}">
+			<span><a href="javascript:void(0);" id="loginOutButton" >注销</a></span>
+			<span>欢迎     ${LoginCustomer.userName}  !!!</span>
+		</c:if>
 	</div>
 	
 	<div id="content">
@@ -218,6 +229,15 @@ li{
 	$("#loginButton").on("click",function(){
 		window.location.href="${ctx}/front/login";
 	});
+	
+	//退出登录
+	$("#loginOutButton").on("click",function(){
+		window.location.href="${ctx}/front/loginOut";
+	})
+	
+	$("#registerButton").on("click",function(){
+		window.location.href="${ctx}/front/toRegister";
+	})
 	
 	
 	</script>

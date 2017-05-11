@@ -64,12 +64,15 @@ li{
 	clear: both;
 	margin-bottom: 30px;
 	min-height: 400px;
+	
 }
 
 
+
 .box{
-	width: 320px;
+	width: 280px;
 	border:  1px solid;
+	margin-top: 30px;
 	
 }
 

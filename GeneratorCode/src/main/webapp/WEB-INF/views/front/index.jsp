@@ -151,6 +151,7 @@ li{
 		<c:if test="${LoginCustomer != null}">
 			<span><a href="javascript:void(0);" id="loginOutButton" >注销</a></span>
 			<span>欢迎     ${LoginCustomer.userName}  !!!</span>
+			<span><a href="${ctx}/shares/sharesIndex"  >股票管理</a></span>
 		</c:if>
 	</div>
 	

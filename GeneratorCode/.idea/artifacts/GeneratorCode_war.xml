@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GeneratorCode:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="GeneratorCode.war">
+      <element id="artifact" artifact-name="GeneratorCode:war exploded" />
+    </root>
+  </artifact>
+</component>

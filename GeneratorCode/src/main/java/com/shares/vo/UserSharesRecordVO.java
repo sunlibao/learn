@@ -1,6 +1,7 @@
 package com.shares.vo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 用户股票操作记录表
@@ -30,9 +31,14 @@ public class UserSharesRecordVO {
 	private int dealOption;
 	
 	/**
+	 * 操作时间
+	 */
+	private Date dealOptionTime;
+	
+	/**
 	 * 操作说明
 	 */
-	private int note;
+	private String note;
 	
 
 	public Long getId() {
@@ -67,15 +73,22 @@ public class UserSharesRecordVO {
 		this.dealOption = dealOption;
 	}
 
-	public int getNote() {
+	public String getNote() {
 		return note;
 	}
 
-	public void setNote(int note) {
+	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
+
+	public Date getDealOptionTime() {
+		return dealOptionTime;
+	}
+
+	public void setDealOptionTime(Date dealOptionTime) {
+		this.dealOptionTime = dealOptionTime;
+	}
+
 	
 	
 

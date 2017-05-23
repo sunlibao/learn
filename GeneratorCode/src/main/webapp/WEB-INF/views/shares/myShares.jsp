@@ -11,14 +11,20 @@
 <body>
 <jsp:include page="./include/head.jsp"></jsp:include>
 <div id="main">
-		<jsp:include page="./include/left.jsp"></jsp:include>
-		<div  style="width: 900px;float:left;margin-left: 30px;">
+		<div class="leftMenu">
+			<jsp:include page="./include/left.jsp"></jsp:include>
+		</div>
+		<div  class="content">
+				<div style="height: 45px;line-height: 45px;padding-top: 15px;text-align: right;">
+					 <button type="button" onclick="toUserShares()" class="btn btn-primary btn-sm">添加股票</button>
+				</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>用户id</th>
 							<th>股票名称</th>
 							<th>股票编号</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,6 +33,7 @@
 								<td>${shareDto.userSharesId}</td>
 								<td>${shareDto.name}</td>
 								<td>${shareDto.code}</td>
+								<td><a href="${ctx}/shares/findShareOption?userSharesId=${shareDto.userSharesId}&shareId=${shareDto.shareId}">查看操作记录</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -34,6 +41,15 @@
 		</div>
 </div>
 <jsp:include page="./include/foot.jsp"></jsp:include>
+<script type="text/javascript">
+	
+	/** 
+	* 跳转添加用户股票页面
+	*/
+	function toAddSharesOption(){
+		window.location="${ctx}/shares/toAddUserShares";
+	}
 
+</script>
 </body>
 </html>

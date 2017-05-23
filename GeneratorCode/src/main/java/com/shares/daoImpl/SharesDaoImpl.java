@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.shares.dao.SharesDao;
 import com.shares.dto.SharesDTO;
 import com.shares.vo.SharesVO;
+import com.shares.vo.UserSharesRecordVO;
 
 @Repository
 public class SharesDaoImpl implements SharesDao {
@@ -20,7 +21,7 @@ public class SharesDaoImpl implements SharesDao {
 	@Override
 	public List<SharesDTO> findMyShares(Long userId) {
 		
-		String sqlstr ="SELECT t1.id as 'userSharesId',t2.`code`,t2.`name`,t2.note "
+		String sqlstr ="SELECT  t2.id as 'shareId',t1.id as 'userSharesId',t2.`code`,t2.`name`,t2.note "
 				+ " from userShares t1 "
 				+ " left join t_shares t2 on t1.sharesId = t2.id "
 				+ "";
@@ -28,6 +29,36 @@ public class SharesDaoImpl implements SharesDao {
 		List<SharesDTO> result = this.jdbcTemplate.query(sqlstr, new BeanPropertyRowMapper<SharesDTO>(SharesDTO.class));
 		
 		return result;
+	}
+
+	@Override
+	public List<UserSharesRecordVO> findShareOptionByUserSharesId(
+			String userSharesId) {
+		
+		String sqlstr ="SELECT  id,price,dealOption,note,dealOptionTime  from usersharesrecord where userSharesId = ?";
+		
+		List<UserSharesRecordVO> result = this.jdbcTemplate.query(sqlstr, new BeanPropertyRowMapper<UserSharesRecordVO>(UserSharesRecordVO.class),new Object[]{userSharesId});
+		
+		return result;
+	}
+
+	@Override
+	public SharesVO findShareById(String shareId) {
+		
+		List<SharesVO> sharesList = this.jdbcTemplate.query("select id ,name ,code ,note from t_shares where id = ? ", new BeanPropertyRowMapper<SharesVO>(SharesVO.class),new Object[]{shareId});
+		
+		return sharesList.get(0);
+	}
+
+	@Override
+	public Integer saveUserOptionRecord(String userSharesId, String price,
+			String dealOption, String dealOptionTime, String note) {
+		
+		String sqlstr = "INSERT into userSharesRecord (userSharesId,price,dealOption,dealOptionTime,note) values(?,?,?,?,?);";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{userSharesId,price,dealOption,dealOptionTime,note});
+		
+		return 1;
 	}
 	
 	

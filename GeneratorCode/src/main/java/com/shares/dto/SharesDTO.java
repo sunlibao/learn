@@ -10,6 +10,11 @@ public class SharesDTO extends SharesVO {
 	private Long userSharesId;
 	
 	/**
+	 * 股票id
+	 */
+	private Long shareId;
+	
+	/**
 	 * 股票名称
 	 */
 	private String name ;
@@ -54,6 +59,14 @@ public class SharesDTO extends SharesVO {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public Long getShareId() {
+		return shareId;
+	}
+
+	public void setShareId(Long shareId) {
+		this.shareId = shareId;
 	}
 	
 	

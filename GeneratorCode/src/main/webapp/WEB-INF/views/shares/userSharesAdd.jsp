@@ -18,30 +18,13 @@
 		</div>
 		<div class="content" >
 				<div style="text-align: right;padding-top: 15px;">
-					<span>添加记录</span>
+					<span>添加股票</span>
 				</div>
-				<form action="${ctx}/shares/saveUserOption" method="post">
-					<input type="hidden" name="userSharesId" value="${userSharesId}" >
+				<form action="${ctx}/shares/saveUserShares">
 					<div role="form">
 						<div class="form-group">
-						    <label for="name">价格</label>
-						    <input type="text" class="form-control" name="price" placeholder="请输入价格">
-						 </div>	
-						 <div class="form-group">
-						    <label for="name">选择操作</label>
-						    <select class="form-control" name="dealOption">
-						        <option>请选择</option>
-						        <option value="1">买入</option>
-						        <option value="2">卖出</option>
-						    </select>
-						 </div>
-						 <div class="form-group">
-						    <label for="name">操作时间</label>
-						    <input type="text" class="form-control" name="dealOptionTime" onclick="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm;ss'})" placeholder="请输入操作时间">
-						 </div>
-						 <div class="form-group">
-						    <label for="name">买入说明</label>
-						    <textarea class="form-control" rows="3" name="note"></textarea>
+						    <label for="name">股票代码</label>
+						    <input type="number" class="form-control" name="sharesCode" placeholder="股票代码">
 						 </div>
 						 <div class="form-group">
 						    <div class="col-sm-offset-2 col-sm-10">

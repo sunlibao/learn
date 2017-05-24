@@ -30,6 +30,7 @@
 							<th>操作</th>
 							<th>操作时间</th>
 							<th>操作说明</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,6 +48,9 @@
 								</td>
 								<td><fmt:formatDate value="${userShareOption.dealOptionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>  </td>
 								<td>${userShareOption.note}</td>
+								<td>
+									<button type="button" onclick="deleteUserSharesOption(${userShareOption.id})" class="btn btn-primary btn-sm">删除</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -63,6 +67,18 @@
 	*/
 	function toAddSharesOption(userSharedId){
 		window.location="${ctx}/shares/toAddSharesOption?userSharesId="+userSharedId;
+	}
+	
+	/** 
+	* 跳转添加页面
+	*/
+	function deleteUserSharesOption(id){
+		
+		layer.confirm("您确定要删除么?",function(){
+			window.location="${ctx}/shares/deleteUserSharesOption?id="+id+"&userSharesId="+${userSharesId}+"&shareId="+${shareId};
+		})
+		
+		
 	}
 	
 

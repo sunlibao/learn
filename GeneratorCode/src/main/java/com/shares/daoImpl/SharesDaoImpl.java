@@ -21,9 +21,9 @@ public class SharesDaoImpl implements SharesDao {
 	@Override
 	public List<SharesDTO> findMyShares(Long userId) {
 		
-		String sqlstr ="SELECT  t2.id as 'shareId',t1.id as 'userSharesId',t2.`code`,t2.`name`,t2.note "
+		String sqlstr ="SELECT  t2.id as 'shareId',t1.id as 'userSharesId',t1.`sharesCode` as 'code',t2.`name`,t2.note "
 				+ " from userShares t1 "
-				+ " left join t_shares t2 on t1.sharesId = t2.id "
+				+ " left join t_shares t2 on t1.sharesCode = t2.code "
 				+ "";
 		
 		List<SharesDTO> result = this.jdbcTemplate.query(sqlstr, new BeanPropertyRowMapper<SharesDTO>(SharesDTO.class));
@@ -47,7 +47,10 @@ public class SharesDaoImpl implements SharesDao {
 		
 		List<SharesVO> sharesList = this.jdbcTemplate.query("select id ,name ,code ,note from t_shares where id = ? ", new BeanPropertyRowMapper<SharesVO>(SharesVO.class),new Object[]{shareId});
 		
-		return sharesList.get(0);
+		if(sharesList.size() > 0){
+			return sharesList.get(0);
+		}
+			return null;
 	}
 
 	@Override
@@ -57,6 +60,70 @@ public class SharesDaoImpl implements SharesDao {
 		String sqlstr = "INSERT into userSharesRecord (userSharesId,price,dealOption,dealOptionTime,note) values(?,?,?,?,?);";
 		
 		this.jdbcTemplate.update(sqlstr, new Object[]{userSharesId,price,dealOption,dealOptionTime,note});
+		
+		return 1;
+	}
+
+	
+	@Override
+	public Integer saveUserShares(Long userId, String sharesCode, int state) {
+		
+		String sqlstr = "INSERT into userShares (userId,sharesCode,state,dr) values(?,?,?,?);";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{userId,sharesCode,state,0});
+		
+		return 1;
+		
+	}
+
+	@Override
+	public List<SharesVO> findSharesList() {
+		
+		String sqlstr = "select * from t_shares";
+		
+		List<SharesVO> result =  this.jdbcTemplate.query(sqlstr, new BeanPropertyRowMapper<SharesVO>(SharesVO.class));
+		
+		return result;
+	}
+
+	@Override
+	public Integer saveShares(String code, String name, String note) {
+		
+		String sqlstr = "INSERT into t_shares (code,name,note) values(?,?,?);";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{code,name,note});
+		
+		return 1;
+		
+	}
+
+	@Override
+	public Integer deleteShares(String sharesId) {
+		
+		String sqlstr = "delete from  t_shares where id = ?";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{sharesId});
+		
+		return 1;
+	}
+
+	@Override
+	public Integer deleteUserSharesOptionById(String id) {
+		
+		String sqlstr = "delete from  userSharesRecord where id = ?";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{id});
+		
+		return 1;
+		
+	}
+
+	@Override
+	public Integer deleteUserShares(String id) {
+		
+		String sqlstr = "delete from  userShares  where id = ?";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{id});
 		
 		return 1;
 	}

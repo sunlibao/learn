@@ -55,6 +55,64 @@ public class SharesServiceImpl implements SharesService {
 		
 		return result;
 	}
+
+	@Override
+	public Integer saveUserShares(Long userId, String sharesCode) {
+		
+		//根据股票编号查询股票
+		//SharesVO sharesVO =  this.sharesDao.findSharesByCode(sharesCode);
+		
+		//如果股票不存在，则添加股票
+		/*if(sharesVO == null ){
+			Integer result = this.sharesDao.saveShares(sharesCode);
+		}*/
+		
+		//
+		Integer result = this.sharesDao.saveUserShares(userId,sharesCode,1);
+		
+		
+		return result;
+	}
+
+	@Override
+	public List<SharesVO> findSharesList() {
+		
+		List<SharesVO> result = this.sharesDao.findSharesList();
+		
+		return result;
+	}
+
+	@Override
+	public Integer saveShares(String code, String name, String note) {
+		
+		Integer result = this.sharesDao.saveShares(code,name,note);
+		
+		return result;
+	}
+
+	@Override
+	public Integer deleteShares(String sharesId) {
+		
+		Integer result = this.sharesDao.deleteShares(sharesId);
+		
+		return result;
+	}
+
+	@Override
+	public Integer deleteUserSharesOptionById(String id) {
+		
+		Integer result = this.sharesDao.deleteUserSharesOptionById(id);
+		
+		return result;
+	}
+
+	@Override
+	public Integer deleteUserShares(String id) {
+		
+		Integer result = this.sharesDao.deleteUserShares(id);
+		
+		return result;
+	}
 	
 
 	

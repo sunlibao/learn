@@ -4,4 +4,7 @@
 <c:set var="ctx" value="<%=request.getContextPath()%>"></c:set>
 	<ul class="list-group">
 		<li class="list-group-item"><a href="${ctx}/shares/myShares">我的股票</a></li>
+		<c:if test=" ${LoginCustomer.userName =='sun' }">
+			<li class="list-group-item"><a href="${ctx}/shares/shares">系统股票</a></li>
+		</c:if>
 	</ul>

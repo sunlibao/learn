@@ -18,9 +18,9 @@ public class UserSharesVO {
 	private Long userId;
 	
 	/**
-	 * 股票Id
+	 * 股票编号
 	 */
-	private Long sharesId;
+	private String sharesCode;
 	
 	/**
 	 * 状态   1-关注  2-持仓  3-清仓
@@ -51,13 +51,6 @@ public class UserSharesVO {
 		this.userId = userId;
 	}
 
-	public Long getSharesId() {
-		return sharesId;
-	}
-
-	public void setSharesId(Long sharesId) {
-		this.sharesId = sharesId;
-	}
 
 	public Integer getState() {
 		return state;
@@ -73,6 +66,14 @@ public class UserSharesVO {
 
 	public void setDr(Integer dr) {
 		this.dr = dr;
+	}
+
+	public String getSharesCode() {
+		return sharesCode;
+	}
+
+	public void setSharesCode(String sharesCode) {
+		this.sharesCode = sharesCode;
 	}
 	
 	

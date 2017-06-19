@@ -27,6 +27,7 @@
             <value>classpath:database.properties</value>
         </property>
     </bean>
+    
 
 
  <!-- 配置数据源 -->  

@@ -110,5 +110,30 @@ public class LoginFrontController {
 	}
 	
 	
+		//前台跳转到登录页面
+		@RequestMapping("/toAdmin")
+		public ModelAndView toAdmin(HttpServletRequest request){
+			
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("admin");
+			
+			
+			return modelAndView;
+		}
+		
+		//前台跳转到登录页面
+				@RequestMapping("/toOther")
+				public ModelAndView toOther(HttpServletRequest request){
+					
+					
+					ModelAndView modelAndView = new ModelAndView();
+					modelAndView.setViewName("other");
+					
+					
+					return modelAndView;
+				}
+	
+	
 	
 }

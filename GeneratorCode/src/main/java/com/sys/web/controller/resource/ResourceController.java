@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sys.service.resource.ResourceService;
-import com.sys.vo.resource.ResourceVO;
+import com.sys.vo.resource.ResourceVo;
 
 /**
  * 资源管理类
@@ -31,10 +31,10 @@ public class ResourceController {
 	 */
 	@RequestMapping("/resource/findMeanList")
 	@ResponseBody
-	List<ResourceVO> findMenuList(){
+	List<ResourceVo> findMenuList(){
 		
 		
-		List<ResourceVO> result =  resourceService.findResourceByType("MENU");
+		List<ResourceVo> result =  resourceService.findResourceByType("MENU");
 		
 		
 		return result;

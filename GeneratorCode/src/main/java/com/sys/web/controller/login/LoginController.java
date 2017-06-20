@@ -38,7 +38,6 @@ public class LoginController {
 		}*/
 		
 		LoginDTO loginDTO =  loginService.login(username,password);
-	
 		
 		ModelAndView modelAndView  = new ModelAndView("/gengrator/index");
 		
@@ -51,9 +50,35 @@ public class LoginController {
 			
 		}
 		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	/**
+	 * 跳转到登录页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toLogin.do")
+	public ModelAndView toLogin(HttpServletRequest request){
 		
+		ModelAndView modelAndView  = new ModelAndView("login");
 		
+		return modelAndView;
+	}
+	
+	
+	/**
+	 * 跳转到没有权限页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toAccessDenied.do")
+	public ModelAndView toAccessDenied(HttpServletRequest request){
 		
+		ModelAndView modelAndView  = new ModelAndView("accessDenied");
 		
 		return modelAndView;
 	}

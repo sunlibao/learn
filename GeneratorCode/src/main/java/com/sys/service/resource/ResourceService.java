@@ -2,7 +2,7 @@ package com.sys.service.resource;
 
 import java.util.List;
 
-import com.sys.vo.resource.ResourceVO;
+import com.sys.vo.resource.ResourceVo;
 
 /**
  * 资源相关业务类
@@ -16,7 +16,7 @@ public interface ResourceService {
 	 * @param type
 	 * @return
 	 */
-	List<ResourceVO> findResourceByType(String type);
+	List<ResourceVo> findResourceByType(String type);
 	
 
 }

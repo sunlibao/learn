@@ -126,7 +126,7 @@ public class LoginFrontController {
 			
 			
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("other");
+			modelAndView.setViewName("shares/sharesIndex");
 			
 			
 			return modelAndView;

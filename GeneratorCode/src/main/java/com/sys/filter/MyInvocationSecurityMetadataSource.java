@@ -34,7 +34,7 @@ public class MyInvocationSecurityMetadataSource implements FilterInvocationSecur
     private static Map<String, Collection<ConfigAttribute>> resourceMap = null;  
 	
     //tomcat启动时实例化一次  
-    public MyInvocationSecurityMetadataSource() {}     
+    public MyInvocationSecurityMetadataSource() {}
  
     //参数是要访问的url，返回这个url对于的所有权限（或角色）  
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {   
@@ -63,8 +63,8 @@ public class MyInvocationSecurityMetadataSource implements FilterInvocationSecur
     
     
     public boolean supports(Class<?>clazz) {
-            return true;    
-            }
+            return true;
+        }
     
     public Collection<ConfigAttribute> getAllConfigAttributes() {
     	

@@ -84,6 +84,20 @@ public class LoginController {
 	}
 	
 	
+	/**
+	 * 跳转到登录页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("toIndex.do")
+	public ModelAndView toIndex(HttpServletRequest request){
+		
+		ModelAndView modelAndView  = new ModelAndView("index");
+		
+		return modelAndView;
+	}
+	
+	
 	
 
 }

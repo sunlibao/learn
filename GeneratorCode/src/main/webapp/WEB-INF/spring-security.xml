@@ -9,10 +9,8 @@
     <http pattern="/view/login.jsp" security="none" />   
     <http access-denied-page="/toAccessDenied.do">  
         <form-login login-page="/toLogin.do" 
-        	authentication-success-handler-ref="loginSuccessHandler"
         	always-use-default-target="true"
-        	default-target-url="/shares/sharesIndex"
-        	
+        	default-target-url="/toIndex.do"
         /> 
         <session-management>  
             <concurrency-control max-sessions="1" 

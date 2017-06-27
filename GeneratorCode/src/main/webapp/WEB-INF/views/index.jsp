@@ -3,21 +3,17 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>   
 <c:set var="ctx" value="<%=request.getContextPath()%>"></c:set>
 <!DOCTYPEHTMLPUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN">  
- 
-<html>  
- 
-<head>  
- 
-<title>My JSP 'index.jsp' starting page</title>   
-</head>  
- 
-<body>  
-      <h3>这是首页</h3>欢迎  
-    <sec:authentication property ="name"/> !  
- 
-        
-    <a href="${ctx}/toAdmin">进入admin页面</a>
-    <a href="${ctx}/toOther">进入其它页面</a>   
-</body>  
- 
+<html>
+<frameset rows="20%,70%,10%" cols="*">
+    <frameset rows="50%" cols="*" frameborder="yes" border="1" framespacing="1">
+        <frame src="${ctx}//inc/header.html"/>
+    </frameset>
+    <frameset rows="*" cols="300px,70%" frameborder="yes" framespacing="1">
+        <frame src="${ctx}/inc/left.jsp"/>
+        <frame name="main" src="${ctx}/inc/main.html"/>
+    </frameset>
+    <frameset rows="80%" cols="*" frameborder="yes" border="1" framespacing="1">
+        <frame src="${ctx}/inc/footer.html"/>
+    </frameset>
+</frameset>
 </html>

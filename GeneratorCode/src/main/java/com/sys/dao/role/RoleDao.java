@@ -2,10 +2,13 @@ package com.sys.dao.role;
 
 import java.util.List;
 
+import com.sys.dao.base.BaseRepository;
+import com.sys.entity.RoleEntity;
 import com.sys.vo.role.RoleVo;
 
-public interface RoleDao {
+public interface RoleDao extends BaseRepository<RoleEntity>  {
 
+	
 	/**
 	 * 根据地址查询角色信息
 	 * @param url 请求地址

@@ -2,9 +2,10 @@ package com.sys.service.role;
 
 import java.util.List;
 
+import com.sys.entity.RoleEntity;
 import com.sys.vo.role.RoleVo;
 
-public interface RoleService {
+public interface RoleService{
 
 	/**
 	 * 根据路径查询这个用户的所有角色
@@ -19,6 +20,12 @@ public interface RoleService {
 	 * @return
 	 */
 	List<RoleVo> findRoleListByUserName(String username);
+
+	/**
+	 * 查询角色列表
+	 * @return
+	 */
+	List<RoleEntity> findRoleList();
 
 	
 	

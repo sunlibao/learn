@@ -2,21 +2,26 @@ package com.sys.daoImpl.role;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sys.dao.role.RoleDao;
+import com.sys.daoImpl.base.BaseRepositoryImpl;
 import com.sys.vo.role.RoleVo;
 
-@Repository
-public class RoleDaoImpl implements RoleDao {
+
+public class RoleDaoImpl   {
+
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
-	@Override
+	
+	
+	
 	public List<RoleVo> findRoleListByUrl(String url) {
 		
 		String sqlstr = "SELECT role.* "
@@ -30,7 +35,7 @@ public class RoleDaoImpl implements RoleDao {
 		return list;
 	}
 
-	@Override
+	
 	public List<RoleVo> findRoleListByUserName(String username) {
 		
 		String sqlstr = "SELECT role.* "

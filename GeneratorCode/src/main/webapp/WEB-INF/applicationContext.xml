@@ -52,10 +52,14 @@
                 <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
             </props>
         </property>
+        
     </bean>
     
      <!-- spring data jpa repositories -->
-    <jpa:repositories base-package="com.sys"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory">
+    <jpa:repositories base-package="com.sys"  
+    	transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"
+    	factory-class="com.sys.factory.BaseRepositoryFactoryBean"
+    	>
     </jpa:repositories>
     
     <!-- hibernate 对jpa 的实现 -->

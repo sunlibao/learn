@@ -6,6 +6,7 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">  
  
   <!--登录页面不过滤 -->  
+  	<http pattern="/index.html" security="none" />
     <http pattern="/view/login.jsp" security="none" />   
     <http access-denied-page="/toAccessDenied.do">  
         <form-login login-page="/toLogin.do" 

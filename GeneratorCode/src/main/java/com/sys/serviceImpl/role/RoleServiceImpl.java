@@ -23,7 +23,6 @@ public class RoleServiceImpl  implements RoleService  {
 	@Override
 	public List<RoleVo> findRoleListByUrl(String url) {
 		
-		
 		return roleDao.findRoleListByUrl(url);
 		
 	}

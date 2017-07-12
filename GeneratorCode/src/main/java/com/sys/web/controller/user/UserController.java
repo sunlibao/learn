@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sys.service.user.UserService;
@@ -31,15 +31,49 @@ public class UserController {
 	
     @RequestMapping("/user/login")
     @ResponseBody
-    public ApiDemand login(HttpServletRequest request) {
+    public ApiDemand login(HttpServletRequest request,HttpServletResponse response) {
+    	
+    
+        /*response.setContentType("text/plain");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setCharacterEncoding("UTF-8");
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", "content");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            String jsonString = JSONObject.toJSONString(map);//随便使用哪个JSONObject都可以，这里只是转为json格式的字符串就行
+            String jsonpCallback = request.getParameter("callback");// 客户端请求参数
+            out.println(jsonpCallback + "(" + jsonString + ")");// 返回jsonp格式数据
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally{
+            out.flush();
+            out.close();
+        }*/
+    	
+    	/*response.setHeader("Access-Control-Allow-Origin", "*");  
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");  
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT");  
+        response.setHeader("Allow", "GET,POST,PUT");*/
+    	
     	
     	ApiDemand apiDemand = new ApiDemand();
     	
-    	try{
+    	apiDemand.setCode(ReturnCode.NOTEXIST.getCode());
+		apiDemand.setMsg("当前用户"+ReturnCode.NOTEXIST.getName());
+		apiDemand.setData("");
+		apiDemand.setCallback(request.getParameter("callback"));
+		
+		/*try{
     		String param = request.getParameter("param");
     		
     		BillModel billModel = ParamUtil.parseBillModel(param);
     		
+    		
+    		if(false)
     		if(StringUtils.isBlank(billModel.getString("userName"))){
         		apiDemand.setCode(ReturnCode.NOTNULL.getCode());
         		apiDemand.setMsg("userName "+ReturnCode.NOTNULL.getName());
@@ -75,11 +109,15 @@ public class UserController {
     		apiDemand.setCode(ReturnCode.ERROR.getCode());
     		apiDemand.setMsg(ReturnCode.ERROR.getName());
     		e.printStackTrace();
-    	}
+    	}*/
+		
+	
+		
     	
         return apiDemand;
         
-    }
+
+    	}
     
     
     

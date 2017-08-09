@@ -8,6 +8,4 @@ import com.sys.dao.user.UserDao;
 public class UserDaoImpl implements UserDao {
 
 	
-	
-	
 }

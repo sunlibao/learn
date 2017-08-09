@@ -23,6 +23,20 @@ public interface UserService {
 	 * @return 用户对象
 	 */
 	UserVo findUserByUserName(String userName);
+
+	/**
+	 * 分页查询用户
+	 * @param page 当前页
+	 * @param pageSize 查询条数
+	 * @return
+	 */
+	List<UserVo> findUserList(Integer page, Integer pageSize);
+
+	/**
+	 * 查询用户总数量
+	 * @return
+	 */
+	Integer findUserCount();
 	
 
 }

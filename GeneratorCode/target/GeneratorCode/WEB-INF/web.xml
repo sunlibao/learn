@@ -10,9 +10,13 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/SpringMVC-servlet.xml</param-value>  
-            <!-- <param-value>/WEB-INF/spring-security.xml</param-value>  -->
-            <!-- 默认是/WEB-INF/[servlet名字]-servlet.xml -->
         </init-param>
+        <init-param>
+        	 <param-name>dispatchOptionsRequest</param-name>  
+        	 <param-value>true</param-value>  
+        </init-param>
+       
+        
         <load-on-startup>1</load-on-startup>
     </servlet>
     
@@ -62,7 +66,7 @@
 </filter-mapping>
      
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/index.html</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
     
 

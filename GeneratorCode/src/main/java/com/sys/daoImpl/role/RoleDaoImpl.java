@@ -21,7 +21,6 @@ public class RoleDaoImpl   {
 	private JdbcTemplate jdbcTemplate;
 	
 	
-	
 	public List<RoleVo> findRoleListByUrl(String url) {
 		
 		String sqlstr = "SELECT role.* "

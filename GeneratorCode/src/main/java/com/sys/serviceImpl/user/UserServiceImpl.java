@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
 
 	@Override
 	public List<UserVo> findUserList() {
@@ -35,7 +36,6 @@ public class UserServiceImpl implements UserService {
 	public UserVo findUserByUserName(String userName) {
 		UserVo userVo = null;
 		
-		
 		List<UserVo> result = this.jdbcTemplate.query("select * from basic_user where userName = ? ",
 				new Object[]{userName} ,new BeanPropertyRowMapper<UserVo>(UserVo.class));
 		
@@ -44,6 +44,30 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return userVo;
+	}
+
+
+	@Override
+	public List<UserVo> findUserList(Integer page, Integer pageSize) {
+		
+		String sqlstr = "select * from basic_user  limit "+(page-1)*pageSize+","+pageSize+" ";
+		
+		List<UserVo> result = this.jdbcTemplate.query(sqlstr,
+				new Object[]{} ,new BeanPropertyRowMapper<UserVo>(UserVo.class));
+		
+		return result;
+	}
+
+
+	@Override
+	public Integer findUserCount() {
+		
+		String sqlstr = "select count(*)  from basic_user ";
+		
+		Integer result = this.jdbcTemplate.queryForObject(sqlstr, Integer.class);
+		
+		return result;
+		
 	}
 	
 	

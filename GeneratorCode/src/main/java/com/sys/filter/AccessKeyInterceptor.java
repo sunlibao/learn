@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AccessKeyInterceptor extends HandlerInterceptorAdapter {
@@ -36,10 +37,14 @@ public class AccessKeyInterceptor extends HandlerInterceptorAdapter {
                 break;  
             }  
         }  */
+        
+      //  String jsonStr =  HttpKit.readData(request);
+        
         response.setHeader("Access-Control-Allow-Origin", "*");  
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");  
-        response.setHeader("Access-Control-Allow-Methods", "GET");  
-        response.setHeader("Allow", "GET");  
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST");  
+        response.setHeader("Allow", "GET,POST");
+        
         return true;  
     }  
       
@@ -51,11 +56,4 @@ public class AccessKeyInterceptor extends HandlerInterceptorAdapter {
         this.defaultAccessAllowedFrom = defaultAccessAllowedFrom;  
     }  
   
- /*   public String getAccessKeyParameterName() {  
-        return AccessKeyParameterName;  
-    }  
-  
-    public void setAccessKeyParameterName(String accessKeyParameterName) {  
-        this.AccessKeyParameterName = AccessKeyParameterName;  
-    } */ 
 }

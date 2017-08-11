@@ -37,6 +37,12 @@ public interface UserService {
 	 * @return
 	 */
 	Integer findUserCount();
+
+	/**
+	 * 保存用户
+	 * @param userVo
+	 */
+	void saveUser(UserVo userVo);
 	
 
 }

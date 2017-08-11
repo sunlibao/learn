@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sys.service.user.UserService;
 import com.sys.vo.user.UserVo;
 import com.sys.web.controller.util.ApiDemand;
@@ -129,11 +130,50 @@ public class UserController {
         		pageModel.setPageSize(pageSize);
         		pageModel.setTotalCount(count);
         		pageModel.setData(userList);
+        		pageModel.setTotalPage(count%pageSize==0?count/pageSize:count/pageSize+1);
         		
         		apiDemand.setData(pageModel);
         		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
         		apiDemand.setCode(ReturnCode.SUCCESS.getCode());
         	}
+    		
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+    }
+    
+    
+    
+    /**
+     * 保存用户
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("user/save")
+    @ResponseBody
+    public ApiDemand save(HttpServletRequest request,HttpServletResponse response){
+
+    	
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+    		String param = request.getParameter("param");
+    		
+    		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
+        		
+    		userVo.setDr(0);
+    		
+    		this.userService.saveUser(userVo);
+        		
+			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
     		
     	}catch(Exception e){
     		apiDemand.setCode(ReturnCode.ERROR.getCode());

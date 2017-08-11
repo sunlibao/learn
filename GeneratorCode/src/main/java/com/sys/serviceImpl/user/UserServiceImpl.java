@@ -69,6 +69,16 @@ public class UserServiceImpl implements UserService {
 		return result;
 		
 	}
+
+
+	@Override
+	public void saveUser(UserVo userVo) {
+		
+		String sqlstr = "insert into basic_user(username,password) values(?,?) ";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getUsername(),userVo.getPassword()});
+		
+	}
 	
 	
 	

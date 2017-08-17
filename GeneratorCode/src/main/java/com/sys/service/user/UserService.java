@@ -43,6 +43,18 @@ public interface UserService {
 	 * @param userVo
 	 */
 	void saveUser(UserVo userVo);
+
+	/**
+	 * 修改用户
+	 * @param userVo 用户对象
+	 */
+	void updateUser(UserVo userVo);
+
+	/**
+	 * 删除用户
+	 * @param userVo 用户对象
+	 */
+	void deleteUser(UserVo userVo);
 	
 
 }

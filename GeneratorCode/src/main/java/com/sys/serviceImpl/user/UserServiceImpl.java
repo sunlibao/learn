@@ -79,6 +79,25 @@ public class UserServiceImpl implements UserService {
 		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getUsername(),userVo.getPassword()});
 		
 	}
+
+	@Override
+	public void updateUser(UserVo userVo) {
+		
+		String sqlstr = "update  basic_user set username = ? ,password = ?  where id = ?  ";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getUsername(),userVo.getPassword(),userVo.getId()});
+		
+	}
+
+
+	@Override
+	public void deleteUser(UserVo userVo) {
+		
+		String sqlstr = "delete  from  basic_user  where id = ?  ";
+		
+		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getId()});
+		
+	}
 	
 	
 	

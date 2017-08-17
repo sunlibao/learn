@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sys.dto.LoginDto;
 import com.sys.service.user.UserService;
 import com.sys.vo.user.UserVo;
 import com.sys.web.controller.util.ApiDemand;
@@ -22,6 +23,7 @@ import com.sys.web.controller.util.PageModel;
 import com.sys.web.controller.util.BillModel;
 import com.sys.web.controller.util.ParamUtil;
 import com.sys.web.controller.util.ReturnCode;
+import com.sys.web.controller.util.UserCacheManger;
 
 @Controller
 public class UserController {
@@ -41,6 +43,9 @@ public class UserController {
     	ApiDemand apiDemand = new ApiDemand();
     	
 		try{
+			
+			String keycode = request.getParameter("key");
+			System.out.println(keycode);
 			
     		String param = request.getParameter("param");
     		
@@ -66,7 +71,13 @@ public class UserController {
             		apiDemand.setMsg("当前用户"+ReturnCode.NOTEXIST.getName());
         		}else{
         			if(userVo.getPassword().equalsIgnoreCase(billModel.getString("password"))){
-        				resMap.put("data", userVo);
+        				
+        				String key = UserCacheManger.pushUserCache(userVo);
+        				
+        				LoginDto loginDto = new LoginDto(key, userVo);
+        				
+        				resMap.put("data", loginDto);
+        				
                     	apiDemand.setData(resMap);
                     	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
                 		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
@@ -163,6 +174,9 @@ public class UserController {
     	
 		try{
 			
+			String keycode = request.getParameter("key");
+			System.out.println(keycode);
+			
     		String param = request.getParameter("param");
     		
     		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
@@ -184,6 +198,78 @@ public class UserController {
 		 return apiDemand;
     }
     
+    /**
+     * 用户修改
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("user/update")
+    @ResponseBody
+    public ApiDemand update(HttpServletRequest request,HttpServletResponse response){
+
+    	
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+    		String param = request.getParameter("param");
+    		
+    		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
+        		
+    		this.userService.updateUser(userVo);
+        		
+			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
+    		
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+    }
+    
+    
+    
+    /**
+     * 删除用户
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("user/delete")
+    @ResponseBody
+    public ApiDemand delete(HttpServletRequest request,HttpServletResponse response){
+
+    	
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+			String keycode = request.getParameter("key");
+			System.out.println(keycode);
+			
+    		String param = request.getParameter("param");
+    		
+    		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
+        		
+    		this.userService.deleteUser(userVo);
+        		
+			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+    }
+     
     
     
     

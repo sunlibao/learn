@@ -110,7 +110,6 @@ public class UserController {
     @ResponseBody
     public ApiDemand findUserList(HttpServletRequest request,HttpServletResponse response){
 
-    	
     	ApiDemand apiDemand = new ApiDemand();
     	
 		try{

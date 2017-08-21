@@ -17,6 +17,19 @@ public interface ResourceService {
 	 * @return
 	 */
 	List<ResourceVo> findResourceByType(String type);
+
+	/**
+	 * 保存资源
+	 * @param resourceVo
+	 * @return
+	 */
+	ResourceVo saveResource(ResourceVo resourceVo);
+
+	/**
+	 * 删除资源
+	 * @param resourceVo 资源vo
+	 */
+	void deleteResource(ResourceVo resourceVo);
 	
 
 }

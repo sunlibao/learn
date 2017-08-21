@@ -4,43 +4,58 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  * 资源Vo
  * @author sunlibao
  *
  */
+@MappedSuperclass
 public class ResourceVo {
-	
 
 	/** 主键id  */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private  Long id;
 	
 	/** 父级菜单id  */
+	@Column(name="p_id")
 	private  Long pId;
 	
 	/** 菜单名称  */
+	@Column(name="name")
 	private  String name;
 	
 	/** 菜单编号  */
+	@Column(name="code")
 	private  String code;
 	
 	/** 排序字段  */
 	private  Integer sort;
 	
 	/** 资源类型  1-菜单  2-按钮  */
+	@Column(name="type")
 	private  Integer type;
 	
 	/** 操作请求地址  */
 	private  String url;
 	
 	/** 添加时间  */
+	@Column(name="ctime")
 	private  Timestamp ctime = new Timestamp(System.currentTimeMillis());
 	
 	/** 修改时间  */
+	@Column(name="utime")
 	private  Timestamp utime;
 	
 	/** 删除标记 0-未删除 1-删除  */
+	@Column(name="dr")
 	private  boolean dr = false;
 	
 

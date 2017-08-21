@@ -9,8 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sys.entity.RoleEntity;
 import com.sys.service.role.RoleService;
+import com.sys.vo.resource.ResourceVo;
+import com.sys.vo.role.RoleVo;
+import com.sys.web.controller.util.ApiDemand;
+import com.sys.web.controller.util.ReturnCode;
 
 /**
  * 角色管理
@@ -24,13 +29,33 @@ public class RoleController {
 	private RoleService roleService;
 	
 	
-	@RequestMapping("role/findRoleList.do")
+	@RequestMapping("/system/role/roleList")
 	@ResponseBody
-	List<RoleEntity> findRoleList(HttpServletRequest request){
+	ApiDemand findRoleList(HttpServletRequest request){
 		
-		List<RoleEntity> result =  this.roleService.findRoleList();
+		ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+			String param = request.getParameter("param");
+			
+			RoleVo roleVo = JSONObject.parseObject(param, RoleVo.class);
+			
+			List<RoleEntity> result =  this.roleService.findRoleList();
+			
+			apiDemand.setData(result);
+    		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+    		apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
+    		
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
 		
-		return result;
 	}
 	
 	

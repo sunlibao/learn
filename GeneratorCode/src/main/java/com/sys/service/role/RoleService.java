@@ -27,6 +27,19 @@ public interface RoleService{
 	 */
 	List<RoleEntity> findRoleList();
 
+	/**
+	 * 保存角色对象
+	 * @param roleVo 角色vo
+	 * @return
+	 */
+	RoleVo saveRole(RoleVo roleVo);
+
+	/**
+	 * 
+	 * @param roleVo
+	 */
+	void deleteRole(RoleVo roleVo);
+
 	
 	
 

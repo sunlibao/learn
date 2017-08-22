@@ -2,8 +2,10 @@ package com.sys.serviceImpl.role;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sys.dao.role.RoleDao;
 import com.sys.entity.RoleEntity;
@@ -38,6 +40,29 @@ public class RoleServiceImpl  implements RoleService  {
 	public List<RoleEntity> findRoleList() {
 		
 		return this.roleDao.findAll();
+		
+	}
+
+	@Override
+	@Transactional
+	public RoleVo saveRole(RoleVo roleVo) {
+		
+		RoleEntity roleEntity = new RoleEntity();
+		
+		BeanUtils.copyProperties(roleVo, roleEntity);
+		
+		this.roleDao.save(roleEntity);
+		
+		roleVo.setId(roleEntity.getId());
+		
+		return roleVo;
+	}
+
+	@Override
+	@Transactional
+	public void deleteRole(RoleVo roleVo) {
+		
+		this.roleDao.delete(roleVo.getId());
 		
 	}
 

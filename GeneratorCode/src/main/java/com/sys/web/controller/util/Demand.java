@@ -1,13 +1,13 @@
 package com.sys.web.controller.util;
 
-import java.io.Serializable;
+
 
 /**
  * 返回结果
  * @author sunlibao
  *
  */
-public class Demand implements Serializable {
+public class Demand  {
 
 	//返回编号
 	private String code;

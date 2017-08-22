@@ -1,15 +1,19 @@
 package com.sys.web.controller.util;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
  * Created by taoye on 2015/11/27.
  */
-public class BillModel extends HashMap<String, Object> implements Serializable {
+public class BillModel extends HashMap<String, Object>  {
 
-    public String getString(Object key) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public String getString(Object key) {
         String value = "";
         Object obj = this.get(key);
         if(obj != null) {

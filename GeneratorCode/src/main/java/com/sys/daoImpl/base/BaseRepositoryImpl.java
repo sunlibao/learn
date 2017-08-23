@@ -11,7 +11,6 @@ public class BaseRepositoryImpl <T> extends SimpleJpaRepository<T, Long> impleme
 	
 	private final Class<T> domainClass;
 	
-	
 	public BaseRepositoryImpl(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
 		this.domainClass = domainClass;

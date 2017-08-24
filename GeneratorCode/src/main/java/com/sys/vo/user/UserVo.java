@@ -1,15 +1,29 @@
 package com.sys.vo.user;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import org.junit.Ignore;
+
 /** */ 
+@MappedSuperclass
 public class  UserVo{
  
 /** 主键id  */
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@Column(name="id")
 private  String id;
 
 /** 用户名  */
+@Column(name="username")
 private  String username;
 
 /** 密码  */
+@Column(name="password")
 private  String password;
 
 /** 删除标记 0-正常 1-删除  */

@@ -126,4 +126,39 @@ public class PermissionController {
 		 return apiDemand;
 		
 	}
+	
+	
+	
+	/**
+	 * 删除权限
+	 * @param request 
+	 * @return
+	 */
+	@RequestMapping("/system/permission/deletePermission")
+	@ResponseBody
+	ApiDemand deletePermission(HttpServletRequest request){
+		
+		ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+			String param = request.getParameter("param");
+			
+			//数据转换
+			PermissionVo permissionVo = JSONObject.parseObject(param,PermissionVo.class);
+			
+			this.permissionService.deletePermission(permissionVo);
+			
+    		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+    		apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+		
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+		
+	}
 }

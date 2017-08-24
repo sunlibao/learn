@@ -11,7 +11,7 @@
     <http access-denied-page="/toAccessDenied.do">  
         <form-login login-page="/toLogin.do" 
         	always-use-default-target="true"
-        	default-target-url="/toIndex.do"
+        	default-target-url="/sys/login/toIndex"
         /> 
         <session-management>  
             <concurrency-control max-sessions="1" 
@@ -31,8 +31,8 @@
     <!--验证配置，认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->  
     <authentication-manager alias="authenticationManager">  
         <authentication-provider user-service-ref="myUserDetailService">  
-            <!--如果用户的密码采用加密的话      <password-encoder hash="md5" />    -->
-        
+            <!--如果用户的密码采用加密的话<password-encoder hash="md5" />        -->
+          
         </authentication-provider>  
     </authentication-manager>  
     <!--在这个类中，你就可以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等 -->  

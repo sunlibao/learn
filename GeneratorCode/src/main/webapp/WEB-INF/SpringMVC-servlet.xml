@@ -20,11 +20,10 @@
     <!-- 设置使用注解的类所在的jar包 -->
     <context:component-scan base-package="com.sys" />
     <context:component-scan base-package="com.front" />
-     <context:component-scan base-package="com.shares" />
+    <context:component-scan base-package="com.shares" />
     
     <!-- 完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-    
     
     <!-- 解决Spring MVC @ResponseBody返回中文字符串乱码问题 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
@@ -51,8 +50,9 @@
          <property name="suffix">
              <value>.html</value>
          </property>
-    </bean>
+     </bean>
     
+    <!-- 设置域名访问的拦截器  -->
     <mvc:interceptors>
     	<mvc:interceptor >
     		<mvc:mapping path="/**"/>

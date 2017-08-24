@@ -2,11 +2,16 @@ package com.sys.serviceImpl.user;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.sys.dao.user.UserDao;
+import com.sys.dto.user.UserDTO;
+import com.sys.entity.user.UserEntity;
 import com.sys.service.user.UserService;
 import com.sys.vo.user.UserVo;
 
@@ -21,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private UserDao userDao;
 	
 
 	@Override
@@ -48,12 +56,16 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public List<UserVo> findUserList(Integer page, Integer pageSize) {
+	public List<UserDTO> findUserList(Integer page, Integer pageSize) {
 		
-		String sqlstr = "select * from basic_user  limit "+(page-1)*pageSize+","+pageSize+" ";
+		String sqlstr = "select u.id ,u.userName ,u.`password`,r.roleName,ur.roleId from basic_user u"
+				+ " LEFT JOIN basic_user_role ur on u.id = ur.userId"
+				+ " left join basic_role r on ur.roleId = r.id  ";
 		
-		List<UserVo> result = this.jdbcTemplate.query(sqlstr,
-				new Object[]{} ,new BeanPropertyRowMapper<UserVo>(UserVo.class));
+		sqlstr +=  "limit "+(page-1)*pageSize+","+pageSize+" ";
+		
+		List<UserDTO> result = this.jdbcTemplate.query(sqlstr,
+				new Object[]{} ,new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		
 		return result;
 	}
@@ -72,11 +84,14 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
+	@Transactional
 	public void saveUser(UserVo userVo) {
 		
-		String sqlstr = "insert into basic_user(username,password) values(?,?) ";
+		UserEntity userEntity = new UserEntity();
 		
-		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getUsername(),userVo.getPassword()});
+		BeanUtils.copyProperties(userVo, userEntity);
+		
+		this.userDao.save(userEntity);
 		
 	}
 
@@ -96,6 +111,21 @@ public class UserServiceImpl implements UserService {
 		String sqlstr = "delete  from  basic_user  where id = ?  ";
 		
 		this.jdbcTemplate.update(sqlstr, new Object[]{userVo.getId()});
+		
+	}
+
+
+	@Override
+	@Transactional
+	public void setUserRole(Long userId, Long roleId) {
+		
+		Integer o = this.jdbcTemplate.queryForObject("select count(*) from basic_user_role where userId = ? ",Integer.class ,new Object[]{userId});
+		
+		if(o == 0){//没有添加
+			this.jdbcTemplate.update("insert into  basic_user_role(roleId,userId) values(?,?)", new Object[]{roleId,userId});
+		}else{//含有就修改
+			this.jdbcTemplate.update("update basic_user_role set roleId = ? where userId = ?", new Object[]{roleId,userId});
+		}
 		
 	}
 	

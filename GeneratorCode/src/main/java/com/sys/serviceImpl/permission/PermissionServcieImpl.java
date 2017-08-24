@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sys.dao.permission.MyPermissionDao;
 import com.sys.dto.permission.PermissionDTO;
@@ -71,6 +72,7 @@ public class PermissionServcieImpl implements PermissionService {
 	}
 
 	@Override
+	@Transactional
 	public PermissionVo savePermission(PermissionVo permissionVo) {
 		
 		PermissionVo temp = myPermissionDao.findByRoleIdAndResId(permissionVo.getRoleId(),permissionVo.getResId());
@@ -88,6 +90,16 @@ public class PermissionServcieImpl implements PermissionService {
 		return permissionVo;
 	
 	}
+
+	@Override
+	@Transactional
+	public void deletePermission(PermissionVo permissionVo) {
+		
+		this.myPermissionDao.delete(permissionVo.getId());
+		
+	}
+	
+	
 	
 	
 	

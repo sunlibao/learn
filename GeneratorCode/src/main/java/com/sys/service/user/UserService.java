@@ -2,6 +2,7 @@ package com.sys.service.user;
 
 import java.util.List;
 
+import com.sys.dto.user.UserDTO;
 import com.sys.vo.user.UserVo;
 
 
@@ -30,7 +31,7 @@ public interface UserService {
 	 * @param pageSize 查询条数
 	 * @return
 	 */
-	List<UserVo> findUserList(Integer page, Integer pageSize);
+	List<UserDTO> findUserList(Integer page, Integer pageSize);
 
 	/**
 	 * 查询用户总数量
@@ -55,6 +56,13 @@ public interface UserService {
 	 * @param userVo 用户对象
 	 */
 	void deleteUser(UserVo userVo);
+
+	/**
+	 * 设置用户角色id
+	 * @param userId 用户id
+	 * @param roleId 角色id
+	 */
+	void setUserRole(Long userId, Long roleId);
 	
 
 }

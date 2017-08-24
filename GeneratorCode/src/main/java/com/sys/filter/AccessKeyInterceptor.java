@@ -18,11 +18,11 @@ public class AccessKeyInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {  
         String accessKey=request.getParameter(accessKeyParameterName);  
         String referer = request.getHeader("Referer");  
-        URL u = new URL(referer);  
-        String host = u.getHost().toLowerCase();  
+        //URL u = new URL(referer);  
+        //String host = u.getHost().toLowerCase();  
         if(accessKey==null){
             System.out.println("====================================ILLEGAL ACCESS: ACCESS_KEY_MISSING!=======================");  
-        }else{  
+        }else{
         	/*System.out.println("====================================ACCESS WITH Access KEY:"+accessKey+"====================");  
             IAccess access = accessService.getAccess(UserSessionUtils.getUserSession(request), accessKey);  
             if(access!=null){  

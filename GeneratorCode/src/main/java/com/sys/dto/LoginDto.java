@@ -13,16 +13,13 @@ public class LoginDto {
 	 * 登录标记key
 	 */
 	private String key;
-	
+
 	/**
-	 * 用户vo
+	 * 用户名
 	 */
-	private UserVo userVo;
+	private String username;
 	
-	public LoginDto(String key,UserVo userVo){
-		this.key = key;
-		this.userVo = userVo;
-	}
+	
 
 	public String getKey() {
 		return key;
@@ -32,12 +29,13 @@ public class LoginDto {
 		this.key = key;
 	}
 
-	public UserVo getUserVo() {
-		return userVo;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserVo(UserVo userVo) {
-		this.userVo = userVo;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

@@ -22,7 +22,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             Collection<ConfigAttribute> configAttributes)   
                     throws AccessDeniedException, InsufficientAuthenticationException {  
         if(configAttributes == null){
-            return;         
+            return;
         }    
  
         Iterator<ConfigAttribute> ite=configAttributes.iterator();  

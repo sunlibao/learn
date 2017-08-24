@@ -36,4 +36,10 @@ public interface PermissionService {
 	 */
 	PermissionVo savePermission(PermissionVo permissionVo);
 
+	/**
+	 * 
+	 * @param permissionVo
+	 */
+	void deletePermission(PermissionVo permissionVo);
+
 }

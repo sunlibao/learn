@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sys.dto.LoginDto;
+import com.sys.dto.user.UserDTO;
 import com.sys.service.user.UserService;
 import com.sys.vo.user.UserVo;
 import com.sys.web.controller.util.ApiDemand;
@@ -74,9 +75,9 @@ public class UserController {
         				
         				String key = UserCacheManger.pushUserCache(userVo);
         				
-        				LoginDto loginDto = new LoginDto(key, userVo);
+        				//LoginDto loginDto = new LoginDto(key, userVo);
         				
-        				resMap.put("data", loginDto);
+        				//resMap.put("data", loginDto);
         				
                     	apiDemand.setData(resMap);
                     	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
@@ -106,9 +107,9 @@ public class UserController {
      * @param response
      * @return
      */
-    @RequestMapping("user/userList")
+    @RequestMapping("/system/user/findUserPage")
     @ResponseBody
-    public ApiDemand findUserList(HttpServletRequest request,HttpServletResponse response){
+    public ApiDemand findUserPage(HttpServletRequest request,HttpServletResponse response){
 
     	ApiDemand apiDemand = new ApiDemand();
     	
@@ -130,7 +131,7 @@ public class UserController {
         		
         		Integer pageSize = billModel.getInteger("pageSize");
         		
-        		List<UserVo> userList = this.userService.findUserList(page,pageSize);
+        		List<UserDTO> userList = this.userService.findUserList(page,pageSize);
         		
         		Integer count = this.userService.findUserCount();
         		
@@ -164,7 +165,7 @@ public class UserController {
      * @param response
      * @return
      */
-    @RequestMapping("user/save")
+    @RequestMapping("/system/user/saveUser")
     @ResponseBody
     public ApiDemand save(HttpServletRequest request,HttpServletResponse response){
 
@@ -173,14 +174,13 @@ public class UserController {
     	
 		try{
 			
-			String keycode = request.getParameter("key");
-			System.out.println(keycode);
-			
     		String param = request.getParameter("param");
     		
     		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
-        		
-    		userVo.setDr(0);
+    		
+    		if(userVo.getDr()==null){
+    			userVo.setDr(0);
+    		}
     		
     		this.userService.saveUser(userVo);
         		
@@ -198,58 +198,19 @@ public class UserController {
     }
     
     /**
-     * 用户修改
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping("user/update")
-    @ResponseBody
-    public ApiDemand update(HttpServletRequest request,HttpServletResponse response){
-
-    	
-    	ApiDemand apiDemand = new ApiDemand();
-    	
-		try{
-			
-    		String param = request.getParameter("param");
-    		
-    		UserVo userVo = JSONObject.parseObject(param, UserVo.class);
-        		
-    		this.userService.updateUser(userVo);
-        		
-			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
-			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
-        	
-    		
-    	}catch(Exception e){
-    		apiDemand.setCode(ReturnCode.ERROR.getCode());
-    		apiDemand.setMsg(ReturnCode.ERROR.getName());
-    		e.printStackTrace();
-    	}
-    	
-		 return apiDemand;
-    }
-    
-    
-    
-    /**
      * 删除用户
      * @param request
      * @param response
      * @return
      */
-    @RequestMapping("user/delete")
+    @RequestMapping("/system/user/deleteUser")
     @ResponseBody
-    public ApiDemand delete(HttpServletRequest request,HttpServletResponse response){
+    public ApiDemand deleteUser(HttpServletRequest request,HttpServletResponse response){
 
     	
     	ApiDemand apiDemand = new ApiDemand();
     	
 		try{
-			
-			String keycode = request.getParameter("key");
-			System.out.println(keycode);
 			
     		String param = request.getParameter("param");
     		
@@ -270,6 +231,43 @@ public class UserController {
     }
      
     
+   
+    /**
+     * 设置用户角色
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(" /system/user/setUserRole")
+    @ResponseBody
+    public ApiDemand setUserRole(HttpServletRequest request,HttpServletResponse response){
+
+    	
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+			
+    		String param = request.getParameter("param");
+    		
+    		BillModel billModel = ParamUtil.parseBillModel(param);
+        		
+    		Long userId = billModel.getLong("userId");
+    		Long roleId = billModel.getLong("roleId");
+    		
+    		
+    		this.userService.setUserRole(userId,roleId);
+        		
+			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+    }
     
     
     

@@ -3,6 +3,8 @@ package com.sys.entity.resource;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Lazy;
+
 import com.sys.vo.resource.ResourceVo;
 
 /**

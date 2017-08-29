@@ -44,6 +44,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         //再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够  
         InterceptorStatusToken token = super.beforeInvocation(fi);  
         try {
+        	
             //执行下一个拦截器  
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());  
 

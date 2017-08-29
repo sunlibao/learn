@@ -79,11 +79,16 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping("toLogin.do")
-	public ModelAndView toLogin(HttpServletRequest request){
+	@ResponseBody
+	public ApiDemand toLogin(HttpServletRequest request){
 		
-		ModelAndView modelAndView  = new ModelAndView("login");
+		ApiDemand apiDemand = new ApiDemand();
 		
-		return modelAndView;
+		apiDemand.setCode(ReturnCode.NOTRIGHT.getCode());
+		apiDemand.setMsg(ReturnCode.NOTRIGHT.getName());
+		
+		
+		return apiDemand;
 	}
 	
 	
@@ -123,7 +128,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/sys/login/toIndex")
 	@ResponseBody
-	public String toIndex(HttpServletRequest request,HttpServletResponse response) {
+	public ApiDemand  toIndex(HttpServletRequest request,HttpServletResponse response) {
 		
     	ApiDemand apiDemand = new ApiDemand();
     	
@@ -145,11 +150,10 @@ public class LoginController {
 	        System.out.println("RemoteAddress" + details.getRemoteAddress());
 	        // 获得sessionid
 	        System.out.println("SessionId" + details.getSessionId());
-		       
-			
+	        
 			LoginDto loginDto = new LoginDto();
 			
-			loginDto.setKey(details.getSessionId());
+			loginDto.setKey(details.getSessionId()==null?request.getParameter("jsessionid"):details.getSessionId());
 			loginDto.setUsername(securityContextImpl.getAuthentication().getName());
 			
 			
@@ -163,10 +167,37 @@ public class LoginController {
     		e.printStackTrace();
     	}
 		
-		return "receive("+JSONObject.toJSONString(apiDemand)+")";
-       
+		return apiDemand;
+		
     	}
 	
+	
+	
+	/**
+	 * 退出
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/system/login/logout")
+	@ResponseBody
+	public ApiDemand  logout(HttpServletRequest request,HttpServletResponse response) {
+		
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+		try{
+        	
+        	apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+    		apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+    		
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+		
+		return apiDemand;
+		
+    	}
 	
 
 }

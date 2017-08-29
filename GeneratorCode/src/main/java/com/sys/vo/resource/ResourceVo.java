@@ -44,6 +44,7 @@ public class ResourceVo {
 	private  Integer type;
 	
 	/** 操作请求地址  */
+	@Column(name="url")
 	private  String url;
 	
 	/** 添加时间  */

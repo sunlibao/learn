@@ -1,5 +1,6 @@
 package com.sys.web.controller.user;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -257,6 +260,42 @@ public class UserController {
     		
     		this.userService.setUserRole(userId,roleId);
         		
+			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
+			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
+        	
+    	}catch(Exception e){
+    		apiDemand.setCode(ReturnCode.ERROR.getCode());
+    		apiDemand.setMsg(ReturnCode.ERROR.getName());
+    		e.printStackTrace();
+    	}
+    	
+		 return apiDemand;
+    }
+    
+    /**
+     * 记载用户角色资源
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/system/user/loadUserMenu")
+    @ResponseBody
+    public ApiDemand loadUserMenu(HttpServletRequest request,HttpServletResponse response){
+
+    	
+    	ApiDemand apiDemand = new ApiDemand();
+    	
+    	
+		try{
+			
+			Map<String,Object> resMap = new HashMap<String, Object>();
+			
+			 SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession()
+		                .getAttribute("SPRING_SECURITY_CONTEXT");
+			 
+			 List<GrantedAuthority> authorities = (List<GrantedAuthority>)securityContextImpl.getAuthentication().getAuthorities();   
+
+			apiDemand.setData(authorities);
 			apiDemand.setMsg(ReturnCode.SUCCESS.getName());
 			apiDemand.setCode(ReturnCode.SUCCESS.getCode());
         	

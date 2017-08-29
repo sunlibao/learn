@@ -12,7 +12,7 @@ public enum ReturnCode {
     ERROR("500","操作失败"),
     NOTNULL("30001","不能为空"),
     NOTEXIST("30002","不存在"),
-    NOTRIGHT("30003","不正确");
+    NOTRIGHT("30003","没有权限");
     
     //编号
     private String code;

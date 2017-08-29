@@ -33,7 +33,7 @@ public class AntUrlPathMatcher implements UrlMatcher {
      public boolean pathMatchesUrl(Object path, String url) {   
          if (("/**".equals(path)) || ("**".equals(path))) {  
              return true;       
-             }    
+           }    
 
          return this.pathMatcher.match((String)path, url);   
      }   

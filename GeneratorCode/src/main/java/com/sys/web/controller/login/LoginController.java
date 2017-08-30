@@ -98,11 +98,15 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping("toAccessDenied.do")
-	public ModelAndView toAccessDenied(HttpServletRequest request){
+	@ResponseBody
+	public ApiDemand toAccessDenied(HttpServletRequest request){
 		
-		ModelAndView modelAndView  = new ModelAndView("accessDenied");
+		ApiDemand apiDemand = new ApiDemand();
 		
-		return modelAndView;
+		apiDemand.setCode(ReturnCode.NOTRIGHT.getCode());
+		apiDemand.setMsg(ReturnCode.NOTRIGHT.getName());
+		
+		return apiDemand;
 	}
 	
 	

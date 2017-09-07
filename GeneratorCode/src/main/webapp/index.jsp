@@ -1,1 +1,5 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><title>y</title><link href=./static/css/app.aaa91e9f65095337855677a4565133dc.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.d36211a61921b1bcc9eb.js></script><script type=text/javascript src=./static/js/app.807104fc1619f396e76b.js></script></body></html>
+<html>
+    <body>
+    hello vue1212
+    </body>
+</html>
